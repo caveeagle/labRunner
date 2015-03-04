@@ -155,12 +155,12 @@ Labyrinth.prototype.makeLabyrinth = function()
       //oddPointsInLab.length
       for (var i=0; i<10; i++) 
       {
-        var D = 1+Math.random()*5;
+        var D = 1+Math.random()*4;
         D = D^0; // округление
         var x = oddPointsInLab[i]['x'];
         var y = oddPointsInLab[i]['y'];
           
-        //this.drawBlockLine(x,y,D);
+        this.drawBlockLine(x,y,D);
        }
 
 
@@ -179,6 +179,12 @@ function main()
     Lab = new Labyrinth();
 
     Lab.markOddPoints();
+    
+    /*for (i = 0; i < oddPointsInLab.length; i++)
+    {
+       str = oddPointsInLab[i]['x']+" : "+oddPointsInLab[i]['y'] ;
+       console.info(str);
+    }*/
     
     Lab.makeLabyrinth();
     

@@ -1,11 +1,16 @@
 
 function INIT()
 {
-    makeLabfield();
+    initLabfield();
+    Lab.initLabyrinth(); 
 }
 
-function makeLabfield()
+function initLabfield()
 {
+    var cTable = $('<table>');
+    cTable.addClass("labfield");
+    cTable.id = "labfield";
+
     for(var j = 0; j<ROWS; j++)
     { 
         var tRow = $('<tr/>');
@@ -14,45 +19,40 @@ function makeLabfield()
         {
             var tCell;
             
+            var dynId = "x"+i+"y"+j;
+            
             if( i==0 || i==(COLS-1) || j==0 || j==(ROWS-1) )
             {
-                tCell = $('<td>').text(wallBlock);
+                tCell = $("<td id="+dynId+">").text(wallBlock);
             }
             else
             {
-                tCell = $('<td>').text(emptyBlock);
+                tCell = $("<td id="+dynId+">").text(' ');  
             }
             
             tCell.addClass("tableBlock");
+            
+            var dynId = "x"+i+"y"+j;
+            
+            if(i==1&&j==1)
+            {
+              dynId = "AAA";  
+              tCell.id = dynId;
+            }
+
                 
             tRow.append(tCell);
         }
 
-        $("#labfield").append(tRow);
+        cTable.append(tRow);
     }
+    
+    $("#labContainer").append(cTable);
+
 } 
 
-function getFieldChar(x, y)
+function setFieldChar(X,Y,Ch)
 {
-    var ind = x + y * COLS;
-    
-    if( x<0 || y<0 || x>=COLS || y>=ROWS )
-    {
-        return null;
-    }
-    
-    return $("#labfield tr td").eq(ind).text();
+    var dynId = "x"+X+"y"+Y;
+    document.getElementById(dynId).innerHTML = Ch;
 }
-
-function setFieldChar(x, y, Ch)
-{
-    var ind = x + y * COLS;
-
-    if( x<0 || y<0 || x>=COLS || y>=ROWS )
-    {
-        return null;
-    }
-
-    $("#labfield tr td").eq(ind).text(Ch);
-}
-

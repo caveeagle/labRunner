@@ -37,24 +37,23 @@ $(window).load(function ()
         <br><br>
         <div align=center>
               
-             <input type=button value="  Генерировть  " onclick="main();">
+             <input type=button value="  Создать лабиринт  " onclick="generateLab();">
               
         </div>
 
         <br><br>
         <div class=messageBox id=messageBox>
               
-             Подождите...
+             В глубинах лабиринта...
               
         </div>
         
         
     </td>
     <td width=900>
-        
-       <table class=labfield id=labfield align=center border=0 ><tbody>
-       </tbody></table>
-        
+       
+       <span id=labContainer>
+       </span>
         
     </td>
   </tr>

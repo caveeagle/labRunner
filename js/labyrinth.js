@@ -1,18 +1,18 @@
 
-Labyrinth = function()
-{
-    /* labyrinth blocks */
-    this.blocks = new Array();
-    
-    /* =========================== */
+var Lab = new Object();
 
-    var i, j;
-    /*  Init 2D array  */
+Lab.blocks = new Array(); 
+
+Lab.initLabyrinth = function()
+{
     for(i=0; i<COLS; i++)
     {
-        this.blocks[i] = new Array();
+        Lab.blocks[i] = new Array();
     }
-
+}
+ 
+Lab.clearLabyrinth = function()
+{
     for (j = 0; j < ROWS; j++)
     {
         for (i = 0; i < COLS; i++)
@@ -20,7 +20,7 @@ Labyrinth = function()
            this.blocks[i][j] = emptyBlock;
         }
     }
-    
+
     for(j = 0; j < ROWS; j++)
     {
             this.blocks[0][j] = wallBlock;
@@ -31,27 +31,28 @@ Labyrinth = function()
             this.blocks[i][0] = wallBlock;
             this.blocks[i][ROWS-1] = wallBlock;
     }
-    
     for(i = mainRoomXmin+1; i <= mainRoomXmax-1; i++)
     {
-        this.blockSet(i,mainRoomYmin,wallBlock);
-        this.blockSet(i,mainRoomYmax,wallBlock);
+        this.blocks[i][mainRoomYmin] = wallBlock;
+        this.blocks[i][mainRoomYmax] = wallBlock;
     }
     for(j = mainRoomYmin+1; j <= mainRoomYmax-1; j++)
     {
-        this.blockSet(mainRoomXmin,j,wallBlock);
-        this.blockSet(mainRoomXmax,j,wallBlock);
+        this.blocks[mainRoomXmin][j] = wallBlock;
+        this.blocks[mainRoomXmax][j] = wallBlock;
     } 
+    
 } 
-
-/**
-*   Set labyrinth block, both in Object and on the html page
-*   C: block char
-*/
-Labyrinth.prototype.blockSet = function(X,Y,C)
+ 
+Lab.drawLabyrinth = function()
 {
-        this.blocks[X][Y] = C;
-        setFieldChar(X,Y,C);
+    for (j = 0; j < ROWS; j++)
+    {
+        for (i = 0; i < COLS; i++)
+        {
+           setFieldChar(i,j, this.blocks[i][j] );
+        }
+    }
 }
 
 /**
@@ -60,7 +61,7 @@ Labyrinth.prototype.blockSet = function(X,Y,C)
 *       Y точка начала линии
 *       D направление линии ( 1: вверх, 2: вправо, 3:вниз, 4:влево )
 */
-Labyrinth.prototype.drawBlockLine = function(X,Y,D)
+Lab.makeBlockLine = function(X,Y,D)
 { 
     var x0 = X;
     var y0 = Y;
@@ -77,7 +78,7 @@ Labyrinth.prototype.drawBlockLine = function(X,Y,D)
                  break;
         case 4:  dX = -1 ;
                  break;
-        default: alert("Error in drawBlockLine");
+        default: alert("Error in direction (function makeBlockLine)");
                  return;
     }        
     
@@ -93,14 +94,14 @@ Labyrinth.prototype.drawBlockLine = function(X,Y,D)
         
         var ch1 = this.blocks[x1][y1];
         
-        if( ch1==' ' )
+        if( ch1==emptyBlock )
         {
-          this.blockSet(x0,y0,wallBlock)
+          this.blocks[x0][y0] = wallBlock;
         }
 
         var ch2 = this.blocks[x2][y2];
 
-        if( ch2==' ' && ch1==' ' )
+        if( ch2==emptyBlock && ch1==emptyBlock )
         {
             x0 = x0+dX;
             y0 = y0+dY;
@@ -114,7 +115,7 @@ Labyrinth.prototype.drawBlockLine = function(X,Y,D)
 
 var oddPointsInLab = [];
 
-Labyrinth.prototype.markOddPoints = function()
+Lab.markOddPoints = function()
 {
     /** Find Odd Points */
     var i,j;
@@ -147,48 +148,72 @@ Labyrinth.prototype.markOddPoints = function()
         oddPointsInLab[j]['x'] = tX;
         oddPointsInLab[j]['y'] = tY;
     } 
-    
 } 
 
-Labyrinth.prototype.makeLabyrinth = function()
+
+Lab.strengthenWalls = function()
 {
-      for (var i=0; i<oddPointsInLab.length; i++) 
+    // Strengthen walls
+    var i,j;
+    
+    // Correct main Room walls 
+    for(i = mainRoomXmin+1; i <= mainRoomXmax-1; i++)
+    {
+        this.blocks[i][mainRoomYmin] = emptyBlock;
+        this.blocks[i][mainRoomYmax] = emptyBlock;
+    }
+    for(j = mainRoomYmin+1; j <= mainRoomYmax-1; j++)
+    {
+        this.blocks[mainRoomXmin][j] = emptyBlock;
+        this.blocks[mainRoomXmax][j] = emptyBlock;
+    }
+    for(i = mainRoomXmin; i <= mainRoomXmax; i++)
+    {
+        this.blocks[i][mainRoomYmin] = wallBlock;
+        this.blocks[i][mainRoomYmax] = wallBlock;
+    }
+    for(j = mainRoomYmin; j <= mainRoomYmax; j++)
+    {
+        this.blocks[mainRoomXmin][j] = wallBlock;
+        this.blocks[mainRoomXmax][j] = wallBlock;
+    }
+}
+
+
+Lab.makeLabyrinth = function()
+{
+      Lab.clearLabyrinth();
+      Lab.markOddPoints();
+      
+      var i,j;
+      for (i=0; i<oddPointsInLab.length; i++) 
       {
         var D = 1+Math.random()*4;
         D = D^0; // округление
         var x = oddPointsInLab[i]['x'];
         var y = oddPointsInLab[i]['y'];
           
-        this.drawBlockLine(x,y,D);
-       }
-
-
-
-
-
-
-
-
-
+        this.makeBlockLine(x,y,D);
+      }
+      
+      Lab.strengthenWalls();
+      
+      this.blocks[56][mainRoomYmin] = emptyBlock; // Door from Main Room
+       
+      for (i = 86; i < 96; i++) // Make hidden room
+        {
+            for ( j = 33; j < 37; j++)
+            {
+               this.blocks[i][j] = emptyBlock;
+            }
+        }
+      
 }
 
-
-function main()
-{
-    Lab = new Labyrinth();
-
-/*    Lab.markOddPoints();
-    
+function generateLab()
+{ 
     Lab.makeLabyrinth();
-    
-	headlineElement.innerHTML = "Пожалуйста, подождите...";
-	function doTheWork() {
-	 
-	   performLongRunningCalculation();
-	   headlineElement.innerHTML = "Закончено!";
-	}
-	setTimeout(doTheWork, 0);    
-*/
-    
+    Lab.drawLabyrinth();
 }
+
 

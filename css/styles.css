@@ -16,17 +16,19 @@ table.mainspace
     color: #000002;
     font-size:24px;
 }
-
+ 
 .messageBox
 {
     color: #575757;
     font-size:18px;
 }
- 
+
 .labfield
 {
     border-spacing:0px;
+    margin: 0 auto;
 }
+
 .tableBlock
 {
     vertical-align: middle;

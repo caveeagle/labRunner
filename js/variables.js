@@ -14,4 +14,14 @@ var wallBlock = '\u2592';
 var runnerBlock = '\u03A9';
 
 var emptyBlock = ' ';
+
+/* MAIN ROOM COORDS */
     
+var mainRoomXmin = 46;
+
+var mainRoomXmax = 66;
+
+var mainRoomYmin = 20;
+
+var mainRoomYmax = 28;
+

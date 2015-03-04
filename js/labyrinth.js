@@ -152,8 +152,7 @@ Labyrinth.prototype.markOddPoints = function()
 
 Labyrinth.prototype.makeLabyrinth = function()
 {
-      //oddPointsInLab.length
-      for (var i=0; i<10; i++) 
+      for (var i=0; i<oddPointsInLab.length; i++) 
       {
         var D = 1+Math.random()*4;
         D = D^0; // округление
@@ -178,17 +177,18 @@ function main()
 {
     Lab = new Labyrinth();
 
-    Lab.markOddPoints();
-    
-    /*for (i = 0; i < oddPointsInLab.length; i++)
-    {
-       str = oddPointsInLab[i]['x']+" : "+oddPointsInLab[i]['y'] ;
-       console.info(str);
-    }*/
+/*    Lab.markOddPoints();
     
     Lab.makeLabyrinth();
     
-    
+	headlineElement.innerHTML = "Пожалуйста, подождите...";
+	function doTheWork() {
+	 
+	   performLongRunningCalculation();
+	   headlineElement.innerHTML = "Закончено!";
+	}
+	setTimeout(doTheWork, 0);    
+*/
     
 }
 

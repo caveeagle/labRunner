@@ -177,18 +177,18 @@ function main()
 {
     Lab = new Labyrinth();
 
-/*    Lab.markOddPoints();
+    Lab.markOddPoints();
     
-    Lab.makeLabyrinth();
+    //Lab.makeLabyrinth();
     
-	headlineElement.innerHTML = "Пожалуйста, подождите...";
+	//headlineElement.innerHTML = "Пожалуйста, подождите...";
 	function doTheWork() {
 	 
-	   performLongRunningCalculation();
-	   headlineElement.innerHTML = "Закончено!";
+	   Lab.makeLabyrinth();
+	   //headlineElement.innerHTML = "Закончено!";
 	}
 	setTimeout(doTheWork, 0);    
-*/
+
     
 }
 

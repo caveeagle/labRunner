@@ -150,10 +150,15 @@ Labyrinth.prototype.markOddPoints = function()
     
 } 
 
-Labyrinth.prototype.makeLabyrinth = function()
+
+Labyrinth.prototype.stageNum = 20; // CONST
+
+Labyrinth.prototype.makeLabyrinth = function(stage)
 {
       for (var i=0; i<oddPointsInLab.length; i++) 
       {
+        if( i % (this.stageNum) != stage ) continue;
+        
         var D = 1+Math.random()*4;
         D = D^0; // округление
         var x = oddPointsInLab[i]['x'];
@@ -161,8 +166,6 @@ Labyrinth.prototype.makeLabyrinth = function()
           
         this.drawBlockLine(x,y,D);
        }
-
-
 
 
 
@@ -179,12 +182,16 @@ function main()
 
     Lab.markOddPoints();
     
-    //Lab.makeLabyrinth();
-    
 	//headlineElement.innerHTML = "Пожалуйста, подождите...";
-	function doTheWork() {
-	 
-	   Lab.makeLabyrinth();
+	function doTheWork() 
+	{
+	   for( var iter=0; iter<Lab.stageNum; iter++ )
+	   {
+	        //headlineElement.innerHTML = "Стадия";
+	        Lab.makeLabyrinth(iter);
+       }
+
+
 	   //headlineElement.innerHTML = "Закончено!";
 	}
 	setTimeout(doTheWork, 0);    

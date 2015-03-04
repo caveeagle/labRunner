@@ -175,6 +175,7 @@ Labyrinth.prototype.makeLabyrinth = function(stage)
 
 }
 
+var MBOX;
 
 function main()
 {
@@ -182,20 +183,22 @@ function main()
 
     Lab.markOddPoints();
     
-	//headlineElement.innerHTML = "Пожалуйста, подождите...";
-	function doTheWork() 
-	{
-	   for( var iter=0; iter<Lab.stageNum; iter++ )
-	   {
-	        //headlineElement.innerHTML = "Стадия";
+    MBOX = document.getElementById("messageBox");
+     
+	MBOX.innerHTML = "Пожалуйста, подождите...";
+
+   for( var iter=0; iter<Lab.stageNum; iter++ )
+   { 
+    A2(iter);
+   }
+	
+   
+}
+
+
+function A2(iter)
+{
+	        MBOX.innerHTML = "Стадия "+iter;
 	        Lab.makeLabyrinth(iter);
-       }
-
-
-	   //headlineElement.innerHTML = "Закончено!";
-	}
-	setTimeout(doTheWork, 0);    
-
-    
 }
 

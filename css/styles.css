@@ -22,6 +22,7 @@ table.mainspace
     color: #575757;
     font-size:18px;
 }
+.after_str:after {content:'_'}
 
 .labfield
 {
@@ -39,3 +40,4 @@ table.mainspace
     font-size: 14px;
     font-family: monospace;
 }
+

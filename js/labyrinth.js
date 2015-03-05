@@ -3,6 +3,15 @@ var Lab = new Object();
 
 Lab.blocks = new Array(); 
 
+
+function generateLab()
+{ 
+    Lab.makeLabyrinth();
+    Lab.drawLabyrinth();
+    typeInfoMessage("messageBoxId",sent("in the deep"));
+}
+
+
 Lab.initLabyrinth = function()
 {
     for(i=0; i<COLS; i++)
@@ -245,10 +254,5 @@ Lab.makeLabyrinth = function()
       
 }
 
-function generateLab()
-{ 
-    Lab.makeLabyrinth();
-    Lab.drawLabyrinth();
-}
 
 

@@ -84,8 +84,16 @@ Lab.makeBlockLine = function(X,Y,D)
     
     var x1, y1, x2, y2;
     
+    var maxLineLength = 20;
+    
+    var lineLength = 0;
+    
     while(true)
     {
+        lineLength++;
+        
+        if(lineLength > maxLineLength) break;
+        
         x1 = x0+dX;
         y1 = y0+dY;
         
@@ -93,25 +101,52 @@ Lab.makeBlockLine = function(X,Y,D)
         y2 = y1+dY;
         
         var ch1 = this.blocks[x1][y1];
-        
-        if( ch1==emptyBlock )
+
+        if( ch1!=emptyBlock )
         {
-          this.blocks[x0][y0] = wallBlock;
+            this.blocks[x0][y0] = wallBlock;
+            break;
         }
 
         var ch2 = this.blocks[x2][y2];
 
-        if( ch2==emptyBlock && ch1==emptyBlock )
+        if( ch1==emptyBlock && ch2==emptyBlock )
         {
+            this.blocks[x0][y0] = wallBlock;
             x0 = x0+dX;
             y0 = y0+dY;
+            continue;
         }
-        else
+        
+        if( ch1==emptyBlock && ch2!=emptyBlock )
         {
-            return;
+            this.blocks[x0][y0] = wallBlock;
+            
+            if( this.isOuterWall((x0+2*dX), (y0+2*dY)) )
+            {
+                this.blocks[x0][y0] = wallBlock;
+                x0 = x0+dX;
+                y0 = y0+dY;
+                continue;
+            }
+            else
+            {
+                this.blocks[x0][y0] = wallBlock;
+                break;
+            }
         }
+
+        
+
     }
 } 
+
+
+Lab.isOuterWall = function(x,y)
+{
+    return ( x<=0 || y<=0 || x>=COLS-1 || y>=ROWS-1 )
+}
+
 
 var oddPointsInLab = [];
 

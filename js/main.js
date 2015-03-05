@@ -56,3 +56,4 @@ function setFieldChar(X,Y,Ch)
     var dynId = "x"+X+"y"+Y;
     document.getElementById(dynId).innerHTML = Ch;
 }
+

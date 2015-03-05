@@ -84,7 +84,7 @@ Lab.makeBlockLine = function(X,Y,D)
     
     var x1, y1, x2, y2;
     
-    var maxLineLength = 20; 
+    var maxLineLength = 20;
     
     var lineLength = 0;
     

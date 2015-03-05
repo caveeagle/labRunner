@@ -2,7 +2,8 @@
 function INIT()
 {
     initLabfield();
-    Lab.initLabyrinth(); 
+    Lab.initLabyrinth();
+    typeInfoMessage("messageBoxId",sent("in the deep")); 
 }
 
 function initLabfield()

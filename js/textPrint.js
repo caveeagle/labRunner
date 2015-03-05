@@ -13,26 +13,36 @@ function testWork()
    
 }
 
+var textIntervalID;
 function typeInfoMessage(containerId,message)
 {
     var TYPING_DELAY = 100; // in msec
     
-    var c=message.length;
-    j=0;
+    var STRING = message;
     
-    $('#'+containerId).addClass('after_str')
+    var c=STRING.length;
+    var j=0;
+    
+    
+    $('#'+containerId).addClass('after_str');
     $('#'+containerId).text("");
     
-    setInterval(function()
+    if(textIntervalID)
+    {
+        clearInterval(textIntervalID);
+    }
+    
+    textIntervalID = setInterval(function()
     {
         if(j<c)
         {
-            $('#'+containerId).text($('#'+containerId).text()+message[j]);
+            $('#'+containerId).text($('#'+containerId).text()+STRING[j]);
             j=j+1;
         }
         else 
         {
             $('#'+containerId).removeClass('after_str');
+            clearInterval(textIntervalID);
         }
         
     },TYPING_DELAY);

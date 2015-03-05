@@ -22,7 +22,7 @@ table.mainspace
     color: #575757;
     font-size:18px;
 }
-.after_str:after {content:'_'}
+.after_str:after {content:"\2592"}
 
 .labfield
 {

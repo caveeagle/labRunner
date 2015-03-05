@@ -8,7 +8,7 @@ function generateLab()
 { 
     Lab.makeLabyrinth();
     Lab.drawLabyrinth();
-    typeInfoMessage("messageBoxId",sent("in the deep"));
+    typeInfoMessage("messageBoxId",sent("lab created"));
 }
 
 

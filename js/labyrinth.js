@@ -226,32 +226,34 @@ Lab.strengthenWalls = function()
 
 Lab.makeLabyrinth = function()
 {
-      Lab.clearLabyrinth();
-      Lab.markOddPoints();
-      
-      var i,j;
-      for (i=0; i<oddPointsInLab.length; i++) 
-      {
-        var D = 1+Math.random()*4;
-        D = D^0; // округление
-        var x = oddPointsInLab[i]['x'];
-        var y = oddPointsInLab[i]['y'];
-          
-        this.makeBlockLine(x,y,D);
-      }
-      
-      Lab.strengthenWalls();
-      
-      this.blocks[56][mainRoomYmin] = emptyBlock; // Door from Main Room
-       
-      for (i = 86; i < 96; i++) // Make hidden room
+        Lab.clearLabyrinth();
+        Lab.markOddPoints();
+        
+        var i,j;
+        for (i=0; i<oddPointsInLab.length; i++) 
+        {
+            var D = 1+Math.random()*4;
+            D = D^0; // округление
+            var x = oddPointsInLab[i]['x'];
+            var y = oddPointsInLab[i]['y'];
+              
+            this.makeBlockLine(x,y,D);
+        }
+        
+        Lab.strengthenWalls();
+        
+        this.blocks[56][mainRoomYmin] = emptyBlock; // Door from Main Room
+        
+        for (i = 86; i < 96; i++) // Make hidden room
         {
             for ( j = 33; j < 37; j++)
             {
                this.blocks[i][j] = emptyBlock;
             }
         }
-      
+        
+        this.blocks[5][4] = wellBlock;
+        this.blocks[44][14] = wellBlock;
 }
 
 

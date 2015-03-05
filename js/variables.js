@@ -15,6 +15,8 @@ var runnerBlock = '\u03A9';
 
 var emptyBlock = ' ';
 
+var wellBlock = 'o';
+
 /* MAIN ROOM COORDS */
     
 var mainRoomXmin = 46;

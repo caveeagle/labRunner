@@ -41,3 +41,16 @@ table.mainspace
     font-family: monospace;
 }
 
+@font-face 
+{
+    font-family: cristal; 
+    /*src: url('CRYSTAL02.TTF');*/
+    src: url('CRYSTAL01.TTF');
+}
+
+.clockBox
+{
+    color: #AB0000;
+    font-family: cristal;
+    font-size:36px;
+}

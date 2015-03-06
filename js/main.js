@@ -3,6 +3,9 @@ function INIT()
 {
     initLabfield();
     Lab.initLabyrinth();
+    Lab.makeLabyrinth();
+    Runner.Init();
+    Lab.drawLabyrinth();
     typeInfoMessage("messageBoxId",sent("in the deep")); 
 }
 

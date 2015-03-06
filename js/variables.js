@@ -15,7 +15,9 @@ var runnerBlock = '\u03A9';
 
 var emptyBlock = ' ';
 
-var wellBlock = 'o';
+var wellBlock = 'o'; 
+
+var runnerBlock = '<b>R</b>';
 
 /* MAIN ROOM COORDS */
     
@@ -26,4 +28,11 @@ var mainRoomXmax = 66;
 var mainRoomYmin = 20;
 
 var mainRoomYmax = 28;
+
+
+/* DIRECTIONS CONSTANT */
+var    UP = 1;
+var RIGHT = 2;
+var  DOWN = 3;
+var  LEFT = 4;
 

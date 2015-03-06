@@ -6,6 +6,8 @@ Lab.blocks = new Array();
 
 function generateLab()
 { 
+    typeInfoMessage(sent("daytime exceeded"));
+    Lab.atNight();
     Lab.makeLabyrinth();
     Runner.Init();
     Clock.Init();
@@ -258,5 +260,8 @@ Lab.makeLabyrinth = function()
         this.blocks[44][14] = wellBlock;
 }
 
-
+Lab.atNight = function()
+{
+    
+}
 

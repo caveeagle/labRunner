@@ -6,7 +6,7 @@ function sent(str)
    return SENTENCES[lang][str] ? SENTENCES[lang][str] : "";
 }         
          
-var textIntervalID;
+var textIntervalTimerID;
 function typeInfoMessage(message)
 {
     var containerId = "messageBoxId"; // DEFAULT VALUE
@@ -27,12 +27,12 @@ function typeInfoMessage(message)
     $('#'+containerId).addClass('after_str');
     $('#'+containerId).text("");
     
-    if(textIntervalID)
+    if(textIntervalTimerID)
     {
-        clearInterval(textIntervalID);
+        clearInterval(textIntervalTimerID);
     }
     
-    textIntervalID = setInterval(function()
+    textIntervalTimerID = setInterval(function()
     {
         if(j<c)
         {
@@ -42,7 +42,7 @@ function typeInfoMessage(message)
         else 
         {
             $('#'+containerId).removeClass('after_str');
-            clearInterval(textIntervalID);
+            clearInterval(textIntervalTimerID);
         }
         
     },TYPING_DELAY);

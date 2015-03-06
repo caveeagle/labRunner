@@ -6,6 +6,9 @@ var ROWS = 47;
 
 var COLS = 112;
 
+var DAYSTEPS = 12; // Количество шагов за день (но не менее 12)
+   
+
 
 /* BLOCKS CHARS */
 

@@ -6,16 +6,16 @@ function sent(str)
    return SENTENCES[lang][str] ? SENTENCES[lang][str] : "";
 }         
          
-function testWork()
-{
-   
-   typeInfoMessage("messageBoxId",sent("in the deep"));
-   
-}
-
 var textIntervalID;
-function typeInfoMessage(containerId,message)
+function typeInfoMessage(message)
 {
+    var containerId = "messageBoxId"; // DEFAULT VALUE
+    
+    if(arguments[1])
+    {
+        containerId = arguments[1];
+    }
+    
     var TYPING_DELAY = 100; // in msec
     
     var STRING = message;

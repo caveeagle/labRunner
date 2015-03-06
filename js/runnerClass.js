@@ -63,19 +63,18 @@ function testStep()
   
   if(possibility==false)
   {
-    if(Runner.direction==UP) 
-    {
-        Runner.direction = DOWN;
-        possibility = Runner.step();
-        return;
-    }
-    if(Runner.direction==DOWN)
-    {
-        Runner.direction = UP;
-        possibility = Runner.step();
-        return;
-    }
-  } 
+
+    switch (Runner.direction) {
+        case UP:    Runner.direction = DOWN;
+                    break;
+        case DOWN:  Runner.direction = UP;
+                    break;
+    }        
+
+    possibility = Runner.step();
+  }
+  
+  Clock.step(); 
 }
 
 

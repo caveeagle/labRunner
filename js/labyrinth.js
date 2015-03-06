@@ -8,8 +8,9 @@ function generateLab()
 { 
     Lab.makeLabyrinth();
     Runner.Init();
+    Clock.Init();
     Lab.drawLabyrinth();
-    typeInfoMessage("messageBoxId",sent("lab created"));
+    typeInfoMessage(sent("lab created"));
 }
 
 

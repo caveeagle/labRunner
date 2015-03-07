@@ -41,52 +41,67 @@ Runner.step = function()
     else
     {
       Lab.blocks[this.x][this.y] = underRunnerBlock;
-      setFieldChar(this.x,this.y,underRunnerBlock);
+                       
+      this.visibleFields(false);
       
       this.x = this.x+dX;  
       this.y = this.y+dY;
 
       underRunnerBlock = Lab.blocks[this.x][this.y];
-      Lab.blocks[this.x][this.y] = runnerBlock;
-      setFieldChar(this.x,this.y,runnerBlock);
       
+      Lab.blocks[this.x][this.y] = runnerBlock;
+      
+      this.visibleFields(true);
+
       return true;
     }
 }
 
-
-
-
-function testStep()
+Runner.visibleFields = function(flag) // Открывает и закрывает туманом клетки
 {
-  var possibility;
-  
-  possibility = Runner.step();
-  
-  if(possibility==false)
-  {
-
-    switch (Runner.direction) {
-        case UP:    Runner.direction = DOWN;
-                    break;
-        case DOWN:  Runner.direction = UP;
-                    break;
-    }        
-
-    possibility = Runner.step();
-  }
-  
-  Clock.step(); 
-}
-
-function keyChecker(e)
-{
-    var DIR = e.keyCode-37;
-    if(DIR==0){ DIR=4; }
-    
-    if(DIR>=1&&DIR<=4)
+    var i,j;
+    if(flag)
     {
-        Runner.direction = DIR;
-        Runner.step();
+           for( i=-1;i<2;i++)
+           {
+            for( j=-1;j<2;j++)
+            {
+                setFieldChar(this.x+i,this.y+j, Lab.blocks[this.x+i][this.y+j]);
+            }
+           }
+    }
+    else
+    {
+           for( i=-1;i<2;i++)
+           {
+            for( j=-1;j<2;j++)
+            {
+                if(Runner.outsideRoom(this.x+i,this.y+j))
+                {
+                    setFieldChar(this.x+i,this.y+j,fogBlock);
+                }
+            }
+           }
     }
 }
+ 
+Runner.outsideRoom = function(cx,cy) // Внутри безопасной комнаты
+{
+    if( cx > mainRoomXmin-1 && cx < mainRoomXmax+1 &&
+        cy > mainRoomYmin-1 && cy < mainRoomYmax+1 )
+        {
+            return false;
+        }
+    else
+        {
+            return true;
+        }
+}
+
+
+
+
+
+
+
+ 

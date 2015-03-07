@@ -60,6 +60,22 @@ function setFieldChar(X,Y,Ch)
 }
 
 //  ############################ //
+//       Keyboard section        //
+//  ############################ //
+
+function keyChecker(e)
+{
+    var DIR = e.keyCode-37;
+    if(DIR==0){ DIR=4; }
+    
+    if(DIR>=1&&DIR<=4)
+    {
+        Runner.direction = DIR;
+        STEP();
+    }
+}
+
+//  ############################ //
 //        Clock section          //
 //  ############################ //
 
@@ -106,5 +122,19 @@ Clock.step = function()
  
     $("#clockBoxId").text(hStr+":"+mStr);
 }
+
+//  ############################ //
+//       Main step section       //
+//  ############################ //
+
+function STEP()
+{
+  Runner.step();
+  Clock.step(); 
+  
+  
+    
+}
+
 
 

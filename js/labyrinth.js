@@ -7,11 +7,10 @@ Lab.blocks = new Array();
 function generateLab()
 { 
     typeInfoMessage(sent("daytime exceeded"));
-    Lab.atNight();
     Lab.makeLabyrinth();
     Runner.Init();
     Clock.Init();
-    Lab.drawLabyrinth();
+    Lab.drawOpenLabyrinth();
     typeInfoMessage(sent("lab created"));
 }
 
@@ -57,7 +56,7 @@ Lab.clearLabyrinth = function()
     
 } 
  
-Lab.drawLabyrinth = function()
+Lab.drawOpenLabyrinth = function()
 {
     for (j = 0; j < ROWS; j++)
     {
@@ -260,8 +259,45 @@ Lab.makeLabyrinth = function()
         this.blocks[44][14] = wellBlock;
 }
 
-Lab.atNight = function()
+Lab.drawHiddenLabyrinth = function()
 {
+    for (j = 0; j < ROWS; j++)
+    {
+        for (i = 0; i < COLS; i++)
+        {
+           var Ch = fogBlock; // by default
+           
+           if( i==0 || j==0 || i==COLS-1 || j==ROWS-1 )
+           {
+                Ch = wallBlock;
+           }
+           
+           if( i==mainRoomXmin && ( j>=mainRoomYmin && j<=mainRoomYmax ) )
+           {
+                Ch = wallBlock;
+           }
+           if( i==mainRoomXmax && ( j>=mainRoomYmin && j<=mainRoomYmax ) )
+           {
+                Ch = wallBlock;
+           }
+           if(  ( i>=mainRoomXmin && i<=mainRoomXmax ) && j==mainRoomYmin )
+           {
+                Ch = wallBlock;
+           }
+           if(  ( i>=mainRoomXmin && i<=mainRoomXmax ) && j==mainRoomYmax )
+           {
+                Ch = wallBlock;
+           }
+           if(  i>mainRoomXmin && i<mainRoomXmax && j>mainRoomYmin && j<mainRoomYmax )
+           {
+                Ch = emptyBlock;
+           }
+           
+           
+           setFieldChar(i,j, Ch );
+        }
+    }
     
+    setFieldChar(56,mainRoomYmin, emptyBlock );// Door from Main Room
 }
 

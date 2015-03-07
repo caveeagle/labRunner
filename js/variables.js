@@ -22,6 +22,10 @@ var wellBlock = 'o';
 
 var runnerBlock = '<b>R</b>';
 
+var fogBlock = '\u2591';
+
+
+
 /* MAIN ROOM COORDS */
     
 var mainRoomXmin = 46;

@@ -8,7 +8,9 @@ Runner.Init = function()
     this.y = 23;   
     
     underRunnerBlock = Lab.blocks[this.x][this.y];
-    Lab.blocks[this.x][this.y] = runnerBlock;
+    Lab.blocks[this.x][this.y] = runnerBlock; 
+    
+    setFieldChar(this.x,this.y,runnerBlock);
 }
 
 Runner.direction = UP;
@@ -77,4 +79,14 @@ function testStep()
   Clock.step(); 
 }
 
-
+function keyChecker(e)
+{
+    var DIR = e.keyCode-37;
+    if(DIR==0){ DIR=4; }
+    
+    if(DIR>=1&&DIR<=4)
+    {
+        Runner.direction = DIR;
+        Runner.step();
+    }
+}

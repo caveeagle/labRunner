@@ -4,10 +4,12 @@ function INIT()
     initLabfield();
     Lab.initLabyrinth();
     Lab.makeLabyrinth();
+    Lab.drawHiddenLabyrinth();
     Runner.Init();
     Clock.Init();
-    Lab.drawLabyrinth();
-    typeInfoMessage(sent("in the deep")); 
+    typeInfoMessage(sent("in the deep"));
+    
+    $(document).keypress(keyChecker);
 }
 
 //  ############################ //
@@ -41,15 +43,6 @@ function initLabfield()
             
             tCell.addClass("tableBlock");
             
-            var dynId = "x"+i+"y"+j;
-            
-            if(i==1&&j==1)
-            {
-              dynId = "AAA";  
-              tCell.id = dynId;
-            }
-
-                
             tRow.append(tCell);
         }
 

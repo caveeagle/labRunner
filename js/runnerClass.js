@@ -59,22 +59,68 @@ Runner.step = function()
 
 Runner.visibleFields = function(flag) // Открывает и закрывает туманом клетки
 {
+    var visDistance = 2;
+    
     var i,j;
     if(flag)
     {
-           for( i=-1;i<2;i++)
+           for( i=-1;i<=1;i++)
            {
-            for( j=-1;j<2;j++)
+            for( j=-1;j<=1;j++)
             {
                 setFieldChar(this.x+i,this.y+j, Lab.blocks[this.x+i][this.y+j]);
             }
            }
+           
+    switch (this.direction) {
+        case UP:{
+                    for(i=2;i<=visDistance;i++)
+                    {
+                        setFieldChar(this.x+1,this.y-i, Lab.blocks[this.x+1][this.y-i]);
+                        setFieldChar(this.x-1,this.y-i, Lab.blocks[this.x-1][this.y-i]);
+                        setFieldChar(this.x,this.y-i, Lab.blocks[this.x][this.y-i]);
+                    }
+                    break;
+                }
+        case RIGHT:{
+                    for(i=2;i<=visDistance;i++)
+                    {
+                        setFieldChar(this.x+i,this.y+1, Lab.blocks[this.x+i][this.y+1]);
+                        setFieldChar(this.x+i,this.y-1, Lab.blocks[this.x+i][this.y-1]);
+                        setFieldChar(this.x+i,this.y, Lab.blocks[this.x+i][this.y]);
+                    }
+                    break;
+                }
+        case DOWN:{
+                    for(i=2;i<=visDistance;i++)
+                    {
+                        setFieldChar(this.x+1,this.y+i, Lab.blocks[this.x+1][this.y+i]);
+                        setFieldChar(this.x-1,this.y+i, Lab.blocks[this.x-1][this.y+i]);
+                        setFieldChar(this.x,this.y+i, Lab.blocks[this.x][this.y+i]);
+                    }
+                    break;
+                }
+        case LEFT:{
+                    for(i=2;i<=visDistance;i++)
+                    {
+                        setFieldChar(this.x-i,this.y+1, Lab.blocks[this.x-i][this.y+1]);
+                        setFieldChar(this.x-i,this.y-1, Lab.blocks[this.x-i][this.y-1]);
+                        setFieldChar(this.x-i,this.y, Lab.blocks[this.x-i][this.y]);
+                    }
+                    break;
+                }
+    }        
+           
+           
+           
+           
+           
     }
     else
     {
-           for( i=-1;i<2;i++)
+           for( i=-1;i<=1;i++)
            {
-            for( j=-1;j<2;j++)
+            for( j=-1;j<=1;j++)
             {
                 if(Runner.outsideRoom(this.x+i,this.y+j))
                 {

@@ -8,7 +8,7 @@ table.mainspace
 .infofield
 {
     padding: 10px; 
-    vertical-align: top; 
+    vertical-align: top;
 }
 
 .head1
@@ -59,8 +59,10 @@ table.mainspace
 
 .daycountBox
 {
-    color: #AB0000;
+    color: #3F3F3F;
     font-family: cristal;
-    font-size:24px;
+    font-size:20px;
+    position:  relative;
+    top:300px;         
 }
 

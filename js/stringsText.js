@@ -32,3 +32,6 @@ SENTENCES_RU["hope after win"] = "Но Эксперимент продолжается... и вы снова очну
 
 SENTENCES_RU["hope after death"] = "Но Эксперимент продолжается... и надежда есть!"; 
 
+SENTENCES_RU["days count"] = "Идёт %s день в Лабиринте"; 
+
+

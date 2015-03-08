@@ -12,14 +12,21 @@ Number.prototype.pad = function(size)
     
 var Clock = {};
 
+Clock.days = 0;
+
 Clock.Init = function()
 {
     this.CLOCKSTEP =~~ (720/DAYSTEPS);
     
     this.hours   = 12;
     this.minutes =  0;
-
-    this.days = 1;
+    
+    this.days = this.days+1;
+    
+    var count_str =  sent("days count");
+    count_str = count_str.replace("%s",this.days);
+    
+    $("#daycountBoxId").text(count_str);
     
     var mStr = this.minutes.pad(2);
     

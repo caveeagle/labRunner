@@ -12,7 +12,7 @@ function INIT()
     Clock.Init();
     Hero.init();
     typeInfoMessage(sent("in the deep"));
-    
+    Lab.nightTimeout = 2;
     $(document).keypress(keyChecker);
 }
 
@@ -127,6 +127,12 @@ function keyChecker(e)
     {
         Runner.direction = DIR;
         STEP();
+    }
+    
+    if(Lab.stage != DAY)
+    {
+        Lab.nightTimeout--;
+        if(Lab.nightTimeout==0){Lab.dawn()}
     }
 }
 

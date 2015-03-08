@@ -7,9 +7,9 @@ Lab.blocks = new Array();
 function generateLab()
 { 
     Lab.makeLabyrinth();
-    Runner.Init();
     Clock.Init();
     Lab.drawHiddenLabyrinth();
+    Runner.Init();
     typeInfoMessage(sent("lab created"));
 }
 
@@ -312,8 +312,10 @@ Lab.failed = function()
     alert(sent("you lose"));
     alert(sent("hope after death"));
     typeInfoMessage(sent("outside at night"));
+    Lab.makeLabyrinth();
     Lab.drawHiddenLabyrinth();
     Lab.gateClose();
+    Lab.nightTimeout = 2;
 }
 
 
@@ -321,9 +323,11 @@ Lab.night = function()
 {
     this.stage = NIGHT;
     typeInfoMessage(sent("daytime exceeded"));
-    Runner.Init();
+    Lab.makeLabyrinth();
     Lab.drawHiddenLabyrinth();
+    Runner.Init();
     Lab.gateClose();
+    Lab.nightTimeout = 6;
 }
 
 
@@ -334,14 +338,29 @@ Lab.win = function()
     alert(sent("you win")); 
     alert(sent("hope after win"));
     typeInfoMessage(sent("after win"));
-    Runner.Init();
+    Lab.makeLabyrinth();
     Lab.drawHiddenLabyrinth();
     Lab.gateClose();
+    Runner.Init();
+    Lab.nightTimeout = 2;
+}
+
+Lab.dawn = function()
+{
+    this.stage = DAY;
+    Clock.Init();  
+    Lab.gateOpen();
 }
 
 Lab.gateClose = function()
 {
     this.blocks[gateX][gateY] = wallBlock;
     setFieldChar(gateX,gateY, wallBlock);
+}
+
+Lab.gateOpen = function()
+{
+    this.blocks[gateX][gateY] = emptyBlock;
+    setFieldChar(gateX,gateY, emptyBlock);
 }
 

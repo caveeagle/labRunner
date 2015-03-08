@@ -59,7 +59,7 @@ Runner.step = function()
 
 Runner.visibleFields = function(flag) // Открывает и закрывает туманом клетки
 {
-    var visDistance = 2;
+    var visDistance = 3;
     
     var i,j;
     if(flag)
@@ -74,53 +74,76 @@ Runner.visibleFields = function(flag) // Открывает и закрывает туманом клетки
            
     switch (this.direction) {
         case UP:{
-                    for(i=2;i<=visDistance;i++)
+                    for(i=1;i<=visDistance;i++)
                     {
                         setFieldChar(this.x+1,this.y-i, Lab.blocks[this.x+1][this.y-i]);
                         setFieldChar(this.x-1,this.y-i, Lab.blocks[this.x-1][this.y-i]);
                         setFieldChar(this.x,this.y-i, Lab.blocks[this.x][this.y-i]);
+
+                        if( Lab.blocks[this.x+1][this.y-i]==wallBlock &&
+                            Lab.blocks[this.x-1][this.y-i]==wallBlock &&
+                            Lab.blocks[this.x][this.y-i]==wallBlock ) {break;}
                     }
                     break;
                 }
         case RIGHT:{
-                    for(i=2;i<=visDistance;i++)
+                    for(i=1;i<=visDistance;i++)
                     {
                         setFieldChar(this.x+i,this.y+1, Lab.blocks[this.x+i][this.y+1]);
                         setFieldChar(this.x+i,this.y-1, Lab.blocks[this.x+i][this.y-1]);
                         setFieldChar(this.x+i,this.y, Lab.blocks[this.x+i][this.y]);
+
+                        if( Lab.blocks[this.x+i][this.y+1]==wallBlock &&
+                            Lab.blocks[this.x+i][this.y-1]==wallBlock &&
+                            Lab.blocks[this.x+i][this.y]==wallBlock ) {break;}
+                        
                     }
                     break;
                 }
         case DOWN:{
-                    for(i=2;i<=visDistance;i++)
+                    for(i=1;i<=visDistance;i++)
                     {
                         setFieldChar(this.x+1,this.y+i, Lab.blocks[this.x+1][this.y+i]);
                         setFieldChar(this.x-1,this.y+i, Lab.blocks[this.x-1][this.y+i]);
                         setFieldChar(this.x,this.y+i, Lab.blocks[this.x][this.y+i]);
+
+                        if( Lab.blocks[this.x+1][this.y+i]==wallBlock &&
+                            Lab.blocks[this.x-1][this.y+i]==wallBlock &&
+                            Lab.blocks[this.x][this.y+i]==wallBlock ) {break;}
                     }
                     break;
                 }
         case LEFT:{
-                    for(i=2;i<=visDistance;i++)
+                    for(i=1;i<=visDistance;i++)
                     {
                         setFieldChar(this.x-i,this.y+1, Lab.blocks[this.x-i][this.y+1]);
                         setFieldChar(this.x-i,this.y-1, Lab.blocks[this.x-i][this.y-1]);
                         setFieldChar(this.x-i,this.y, Lab.blocks[this.x-i][this.y]);
-                    }
+ 
+                        if( Lab.blocks[this.x-i][this.y+1]==wallBlock &&
+                            Lab.blocks[this.x-i][this.y-1]==wallBlock &&
+                            Lab.blocks[this.x-i][this.y]==wallBlock ) {break;}
+                        
+                   }
                     break;
                 }
-    }        
-           
-           
-           
-           
-           
+        }// End of switch        
     }
     else
     {
            for( i=-1;i<=1;i++)
            {
-            for( j=-1;j<=1;j++)
+            for( j=-visDistance;j<=visDistance;j++)
+            {
+                if(Runner.outsideRoom(this.x+i,this.y+j))
+                {
+                    setFieldChar(this.x+i,this.y+j,fogBlock);
+                }
+            }
+           }
+           for( j=-1;j<=1;j++)
+           {
+            for( i=-visDistance;i<=visDistance;i++)
             {
                 if(Runner.outsideRoom(this.x+i,this.y+j))
                 {

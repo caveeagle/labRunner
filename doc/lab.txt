@@ -1,0 +1,36 @@
+
+    ARRAY2 (x,y)
+
+    x=1; y=1; // начало пути
+    
+    while ((x!=END) or (y!=END)) // конец пути 
+    {
+          LABIRINT[x,y]:=DEADBLOCK; // Мы тут были
+        
+          var k=0;
+          if LABIRINT[x-1,y]=BLANK then k:=k+1;
+          if LABIRINT[x,y-1]=BLANK then k:=k+1;
+          if LABIRINT[x+1,y]=BLANK then k:=k+1;
+          if LABIRINT[x,y+1]=BLANK then k:=k+1;
+        
+          if( k>1 )
+          {  
+            push(ARRAY2,{x,y})
+          }
+        
+          if( k>=1 ) // Привелигерованное направление, идём по нему
+            if LABIRINT[x+1,y]=BLANK then x:=x+1
+              else  if LABIRINT[x,y+1]=BLANK then y:=y+1
+                else  if LABIRINT[x-1,y]=BLANK then x:=x-1
+                  else   if LABIRINT[x,y-1]=BLANK then y:=y-1;
+        
+          if( k==0 )
+          {
+                if (x=ARRAY2{x} and (y=ARRAY2{y}) then 
+                {
+                    pop(ARRAY2)// Мы сейчас тут, но тут тупик
+                    {x,y} = pop(ARRAY2)// поэтому идём назад
+                }
+          }
+    }
+    

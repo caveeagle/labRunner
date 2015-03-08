@@ -10,6 +10,7 @@ function INIT()
     Lab.drawHiddenLabyrinth();
     Runner.Init();
     Clock.Init();
+    Hero.init();
     typeInfoMessage(sent("in the deep"));
     
     $(document).keypress(keyChecker);

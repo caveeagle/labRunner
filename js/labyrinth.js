@@ -305,6 +305,7 @@ Lab.daytimeExceeded = function()
 {
    if(Runner.outsideRoom(Runner.x,Runner.y)||(Runner.x==gateX&&Runner.y==gateY))
    {
+        Hero.death();
         typeInfoMessage(sent("outside at night"));
         alert(sent("you lose"));
         alert(sent("hope after death"));
@@ -323,6 +324,7 @@ Lab.daytimeExceeded = function()
 
 Lab.win = function()
 {
+    Hero.win();
     alert(sent("you win")); 
     alert(sent("hope after win"));
     generateLab();

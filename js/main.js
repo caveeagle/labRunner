@@ -1,6 +1,7 @@
 
 function INIT()
 {
+    $('#head1id').text(sent("header_txt"));  
     initLabfield();
     Lab.initLabyrinth();
     Lab.makeLabyrinth();

@@ -16,13 +16,13 @@ SENTENCES_RU["daytime exceeded base"] = "Время закончилось, и огромные двери с г
 
 SENTENCES_RU["daytime exceeded N2"] = "Но внутри этих стен - ты в безопасности!";
 
-SENTENCES_RU["daytime exceeded"] = SENTENCES_RU["daytime exceeded base"]+SENTENCES_RU["outside at night N1"]+SENTENCES_RU["daytime exceeded N2"]; 
-
 SENTENCES_RU["header_txt"] = "Бегущий по лабиринту"; 
 
 SENTENCES_RU["outside at night N1"] = "Обитающие в ночном лабиринте монстры вылезли наружу... "; 
 
-SENTENCES_RU["outside at night N2"] = "Никто ещё не оставался в живых, проведя ночь снаружи."; 
+SENTENCES_RU["outside at night N2"] = "Никто ещё не оставался в живых, проведя ночь снаружи. "; 
+
+SENTENCES_RU["daytime exceeded"] = SENTENCES_RU["daytime exceeded base"]+SENTENCES_RU["outside at night N1"]+SENTENCES_RU["daytime exceeded N2"]; 
 
 SENTENCES_RU["outside at night"] = SENTENCES_RU["daytime exceeded base"]+SENTENCES_RU["outside at night N1"]+SENTENCES_RU["outside at night N2"]
 
@@ -47,3 +47,4 @@ SENTENCES_RU["after win N2"] = "Но, когда ты очнулся, вокруг снова были бесконеч
 SENTENCES_RU["after win N3"] = "Надо продолжать сражаться!";
 
 SENTENCES_RU["after win"] = SENTENCES_RU["after win N1"]+SENTENCES_RU["after win N2"]+SENTENCES_RU["after win N3"]
+

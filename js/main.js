@@ -8,11 +8,11 @@ function INIT()
     Lab.initLabyrinth();
     Lab.makeLabyrinth();
     Lab.drawHiddenLabyrinth();
+    Lab.stage = NIGHT;
     Runner.Init();
-    Clock.Init();
     Hero.init();
+    setTimeout(Lab.dawn,3000);
     typeInfoMessage(sent("in the deep"));
-    Lab.nightTimeout = 2;
     $(document).keypress(keyChecker);
 }
 
@@ -82,7 +82,7 @@ function typeInfoMessage(message)
         containerId = arguments[1];
     }
     
-    var TYPING_DELAY = 50; // in msec
+    var TYPING_DELAY = 20; // in msec
     
     var STRING = message;
     
@@ -128,12 +128,6 @@ function keyChecker(e)
         Runner.direction = DIR;
         STEP();
     }
-    
-    if(Lab.stage != DAY)
-    {
-        Lab.nightTimeout--;
-        if(Lab.nightTimeout==0){Lab.dawn()}
-    }
 }
 
 //  ############################ //
@@ -142,9 +136,12 @@ function keyChecker(e)
 
 function STEP()
 {
-  Runner.step();
+  if(Lab.stage != REST)
+  {
+    Runner.step();
+  }
   
-  if(this.stage == DAY)
+  if(Lab.stage == DAY)
   {
     Clock.step(); 
   }

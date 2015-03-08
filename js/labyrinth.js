@@ -315,7 +315,7 @@ Lab.failed = function()
     Lab.makeLabyrinth();
     Lab.drawHiddenLabyrinth();
     Lab.gateClose();
-    Lab.nightTimeout = 2;
+    setTimeout(Lab.dawn,20000);
 }
 
 
@@ -327,7 +327,7 @@ Lab.night = function()
     Lab.drawHiddenLabyrinth();
     Runner.Init();
     Lab.gateClose();
-    Lab.nightTimeout = 6;
+    setTimeout(Lab.dawn,20000);
 }
 
 
@@ -341,15 +341,19 @@ Lab.win = function()
     Lab.makeLabyrinth();
     Lab.drawHiddenLabyrinth();
     Lab.gateClose();
-    Runner.Init();
-    Lab.nightTimeout = 2;
+    setTimeout(Lab.dawn,20000);
 }
 
 Lab.dawn = function()
 {
-    this.stage = DAY;
+    if(Lab.stage == REST)
+    {
+        Runner.Init();
+    }
+    Lab.stage = DAY;
     Clock.Init();  
     Lab.gateOpen();
+    typeInfoMessage(sent("lab created"));
 }
 
 Lab.gateClose = function()

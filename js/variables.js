@@ -6,8 +6,8 @@ var ROWS = 47;
 
 var COLS = 112;
 
-//var DAYSTEPS = 180; //  оличество шагов за день (не менее 12 и не более 720)
-var DAYSTEPS = 12;   
+var DAYSTEPS = 180; //  оличество шагов за день (не менее 12 и не более 720)
+//var DAYSTEPS = 12;   
 
 
 /* BLOCKS CHARS */

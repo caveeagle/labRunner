@@ -16,7 +16,7 @@ function typeInfoMessage(message)
         containerId = arguments[1];
     }
     
-    var TYPING_DELAY = 100; // in msec
+    var TYPING_DELAY = 50; // in msec
     
     var STRING = message;
     

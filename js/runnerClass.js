@@ -42,6 +42,8 @@ Runner.step = function()
     }
     else
     {
+      if(this.x==90&&this.y==36) Lab.win();
+      
       Lab.blocks[this.x][this.y] = underRunnerBlock;
                        
       this.visibleFields(false);

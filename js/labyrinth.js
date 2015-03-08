@@ -6,11 +6,10 @@ Lab.blocks = new Array();
 
 function generateLab()
 { 
-    typeInfoMessage(sent("daytime exceeded"));
     Lab.makeLabyrinth();
     Runner.Init();
     Clock.Init();
-    Lab.drawOpenLabyrinth();
+    Lab.drawHiddenLabyrinth();
     typeInfoMessage(sent("lab created"));
 }
 
@@ -245,7 +244,7 @@ Lab.makeLabyrinth = function()
         
         Lab.strengthenWalls();
         
-        this.blocks[56][mainRoomYmin] = emptyBlock; // Door from Main Room
+        this.blocks[gateX][gateY] = emptyBlock; // Gate from Main Room
         
         for (i = 86; i < 96; i++) // Make hidden room
         {
@@ -298,6 +297,36 @@ Lab.drawHiddenLabyrinth = function()
         }
     }
     
-    setFieldChar(56,mainRoomYmin, emptyBlock );// Door from Main Room
+    setFieldChar(gateX,gateY, emptyBlock );// Gate from Main Room
+}
+
+
+Lab.daytimeExceeded = function()
+{
+   if(Runner.outsideRoom(Runner.x,Runner.y)||(Runner.x==gateX&&Runner.y==gateY))
+   {
+        typeInfoMessage(sent("outside at night"));
+        alert(sent("you lose"));
+        alert(sent("hope after death"));
+        generateLab();
+        this.blocks[gateX][gateY] = wallBlock;
+        setFieldChar(gateX,gateY, wallBlock );
+   }
+   else
+   {
+        typeInfoMessage(sent("daytime exceeded"));
+        generateLab();
+        this.blocks[gateX][gateY] = wallBlock;
+        setFieldChar(gateX,gateY, wallBlock );
+   } 
+}
+
+Lab.win = function()
+{
+    alert(sent("you win")); 
+    alert(sent("hope after win"));
+    generateLab();
+    this.blocks[gateX][gateY] = wallBlock;
+    setFieldChar(gateX,gateY, wallBlock );
 }
 

@@ -7,7 +7,7 @@ var ROWS = 47;
 var COLS = 112;
 
 var DAYSTEPS = 180; //  оличество шагов за день (не менее 12 и не более 720)
-   
+//var DAYSTEPS = 12;   
 
 
 /* BLOCKS CHARS */
@@ -35,6 +35,10 @@ var mainRoomXmax = 66;
 var mainRoomYmin = 20;
 
 var mainRoomYmax = 28;
+
+var gateX = 56;
+
+var gateY = mainRoomYmin;
 
 
 /* DIRECTIONS CONSTANT */

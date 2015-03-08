@@ -32,6 +32,8 @@ Runner.step = function()
                     return false;
     }        
     
+    Runner.isCheaterDance(Runner.direction);
+    
     var chNext = Lab.blocks[this.x+dX][this.y+dY];
     
     if(chNext==wallBlock)
@@ -167,7 +169,14 @@ Runner.outsideRoom = function(cx,cy) // Внутри безопасной комнаты
         }
 }
 
-
+Runner.isCheaterDance = function(D)
+{
+    if(!this.cheatConunt) { this.cheatConunt = ""; }
+    this.cheatConunt = this.cheatConunt+D;
+    if(this.cheatConunt.length>6){this.cheatConunt = this.cheatConunt.substr(1)};
+    if(!Runner.outsideRoom(this.x,this.y))
+        if( parseInt(this.cheatConunt) == 224431 ) {Lab.drawOpenLabyrinth();}
+}
 
 
 

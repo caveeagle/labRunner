@@ -130,7 +130,6 @@ function keyChecker(e)
     }
 }
 
-
 //  ############################ //
 //       Main step section       //
 //  ############################ //
@@ -138,8 +137,11 @@ function keyChecker(e)
 function STEP()
 {
   Runner.step();
-  Clock.step(); 
+  
+  if(this.stage == DAY)
+  {
+    Clock.step(); 
+  }
 }
-
 
 

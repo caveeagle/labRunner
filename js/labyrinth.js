@@ -18,8 +18,10 @@ Lab.initLabyrinth = function()
 {
     for(i=0; i<COLS; i++)
     {
-        Lab.blocks[i] = new Array();
+        this.blocks[i] = new Array();
     }
+    
+    this.stage = NIGHT;
 }
  
 Lab.clearLabyrinth = function()
@@ -66,12 +68,6 @@ Lab.drawOpenLabyrinth = function()
     }
 }
 
-/**
-*   Draw labyrinth lines
-*       X точка начала линии
-*       Y точка начала линии
-*       D направление линии ( 1: вверх, 2: вправо, 3:вниз, 4:влево )
-*/
 Lab.makeBlockLine = function(X,Y,DIR)
 { 
     var x0 = X;
@@ -244,8 +240,6 @@ Lab.makeLabyrinth = function()
         
         Lab.strengthenWalls();
         
-        this.blocks[gateX][gateY] = emptyBlock; // Gate from Main Room
-        
         for (i = 86; i < 96; i++) // Make hidden room
         {
             for ( j = 33; j < 37; j++)
@@ -296,8 +290,6 @@ Lab.drawHiddenLabyrinth = function()
            setFieldChar(i,j, Ch );
         }
     }
-    
-    setFieldChar(gateX,gateY, emptyBlock );// Gate from Main Room
 }
 
 
@@ -305,30 +297,51 @@ Lab.daytimeExceeded = function()
 {
    if(Runner.outsideRoom(Runner.x,Runner.y)||(Runner.x==gateX&&Runner.y==gateY))
    {
-        Hero.death();
-        typeInfoMessage(sent("outside at night"));
-        alert(sent("you lose"));
-        alert(sent("hope after death"));
-        generateLab();
-        this.blocks[gateX][gateY] = wallBlock;
-        setFieldChar(gateX,gateY, wallBlock );
+        Lab.failed();
    }
    else
    {
-        typeInfoMessage(sent("daytime exceeded"));
-        generateLab();
-        this.blocks[gateX][gateY] = wallBlock;
-        setFieldChar(gateX,gateY, wallBlock );
+        Lab.night();
    } 
 }
 
+Lab.failed = function()
+{
+    Hero.death();
+    this.stage = REST;
+    alert(sent("you lose"));
+    alert(sent("hope after death"));
+    typeInfoMessage(sent("outside at night"));
+    Lab.drawHiddenLabyrinth();
+    Lab.gateClose();
+}
+
+
+Lab.night = function()
+{
+    this.stage = NIGHT;
+    typeInfoMessage(sent("daytime exceeded"));
+    Runner.Init();
+    Lab.drawHiddenLabyrinth();
+    Lab.gateClose();
+}
+
+
 Lab.win = function()
 {
+    this.stage = REST;
     Hero.win();
     alert(sent("you win")); 
     alert(sent("hope after win"));
-    generateLab();
+    typeInfoMessage(sent("after win"));
+    Runner.Init();
+    Lab.drawHiddenLabyrinth();
+    Lab.gateClose();
+}
+
+Lab.gateClose = function()
+{
     this.blocks[gateX][gateY] = wallBlock;
-    setFieldChar(gateX,gateY, wallBlock );
+    setFieldChar(gateX,gateY, wallBlock);
 }
 

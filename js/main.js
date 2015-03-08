@@ -1,4 +1,6 @@
 
+var lang = "ru"; // язык интерфейса
+
 function INIT()
 {
     $('#head1id').text(sent("header_txt"));  
@@ -58,6 +60,57 @@ function setFieldChar(X,Y,Ch)
 {
     var dynId = "x"+X+"y"+Y;
     document.getElementById(dynId).innerHTML = Ch;
+}
+
+//  ############################ //
+//      TEXT PRINT SECTION       //
+//  ############################ //
+         
+function sent(str)
+{
+   return SENTENCES[lang][str] ? SENTENCES[lang][str] : "";
+}         
+         
+var textIntervalTimerID;
+function typeInfoMessage(message)
+{
+    var containerId = "messageBoxId"; // DEFAULT VALUE
+    
+    if(arguments[1])
+    {
+        containerId = arguments[1];
+    }
+    
+    var TYPING_DELAY = 50; // in msec
+    
+    var STRING = message;
+    
+    var c=STRING.length;
+    var j=0;
+    
+    
+    $('#'+containerId).addClass('after_str');
+    $('#'+containerId).text("");
+    
+    if(textIntervalTimerID)
+    {
+        clearInterval(textIntervalTimerID);
+    }
+    
+    textIntervalTimerID = setInterval(function()
+    {
+        if(j<c)
+        {
+            $('#'+containerId).text($('#'+containerId).text()+STRING[j]);
+            j=j+1;
+        }
+        else 
+        {
+            $('#'+containerId).removeClass('after_str');
+            clearInterval(textIntervalTimerID);
+        }
+        
+    },TYPING_DELAY);
 }
 
 //  ############################ //

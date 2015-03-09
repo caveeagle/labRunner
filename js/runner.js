@@ -80,6 +80,8 @@ Runner.visibleFields = function(flag) // Открывает и закрывает туманом клетки
         case UP:{
                     for(i=1;i<=visDistance;i++)
                     {
+                        if(this.y-i<0){break;}
+                        
                         setFieldChar(this.x+1,this.y-i, Lab.blocks[this.x+1][this.y-i]);
                         setFieldChar(this.x-1,this.y-i, Lab.blocks[this.x-1][this.y-i]);
                         setFieldChar(this.x,this.y-i, Lab.blocks[this.x][this.y-i]);
@@ -93,6 +95,8 @@ Runner.visibleFields = function(flag) // Открывает и закрывает туманом клетки
         case RIGHT:{
                     for(i=1;i<=visDistance;i++)
                     {
+                        if(this.x+i>=COLS){break;}
+                        
                         setFieldChar(this.x+i,this.y+1, Lab.blocks[this.x+i][this.y+1]);
                         setFieldChar(this.x+i,this.y-1, Lab.blocks[this.x+i][this.y-1]);
                         setFieldChar(this.x+i,this.y, Lab.blocks[this.x+i][this.y]);
@@ -107,6 +111,8 @@ Runner.visibleFields = function(flag) // Открывает и закрывает туманом клетки
         case DOWN:{
                     for(i=1;i<=visDistance;i++)
                     {
+                        if(this.y+i>=ROWS){break;}
+                        
                         setFieldChar(this.x+1,this.y+i, Lab.blocks[this.x+1][this.y+i]);
                         setFieldChar(this.x-1,this.y+i, Lab.blocks[this.x-1][this.y+i]);
                         setFieldChar(this.x,this.y+i, Lab.blocks[this.x][this.y+i]);
@@ -120,6 +126,8 @@ Runner.visibleFields = function(flag) // Открывает и закрывает туманом клетки
         case LEFT:{
                     for(i=1;i<=visDistance;i++)
                     {
+                        if(this.x-i<0){break;}
+                        
                         setFieldChar(this.x-i,this.y+1, Lab.blocks[this.x-i][this.y+1]);
                         setFieldChar(this.x-i,this.y-1, Lab.blocks[this.x-i][this.y-1]);
                         setFieldChar(this.x-i,this.y, Lab.blocks[this.x-i][this.y]);
@@ -141,6 +149,7 @@ Runner.visibleFields = function(flag) // Открывает и закрывает туманом клетки
             {
                 if(Runner.outsideRoom(this.x+i,this.y+j))
                 {
+                    if( this.y+j<0 || this.y+j>=ROWS ) {break;}
                     setFieldChar(this.x+i,this.y+j,fogBlock);
                 }
             }
@@ -151,6 +160,7 @@ Runner.visibleFields = function(flag) // Открывает и закрывает туманом клетки
             {
                 if(Runner.outsideRoom(this.x+i,this.y+j))
                 {
+                    if( this.x+i<0 || this.x+i>=COLS ) {break;}
                     setFieldChar(this.x+i,this.y+j,fogBlock);
                 }
             }

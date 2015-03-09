@@ -43,7 +43,7 @@ Clock.step = function()
         this.hours -= 1;
     }
 
-    if(this.hours<=0)
+    if(this.hours<0)
     {
         this.minutes = 0;
         this.hours = 0;

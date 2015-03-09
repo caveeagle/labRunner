@@ -177,7 +177,7 @@ Runner.isCheaterDance = function(D)
     this.cheatConunt = this.cheatConunt+D;
     if(this.cheatConunt.length>6){this.cheatConunt = this.cheatConunt.substr(1)};
     if(!Runner.outsideRoom(this.x,this.y))
-        if( parseInt(this.cheatConunt) == 224431 ) {Lab.drawOpenLabyrinth();}
+    if((~parseInt(this.cheatConunt)&31415926<<1)==62424264) {Lab.drawOpenLabyrinth();}
 }
 
 

@@ -28,9 +28,9 @@ SENTENCES_RU["outside at night"] = SENTENCES_RU["daytime exceeded base"]+SENTENC
 
 SENTENCES_RU["you lose"] = "Аааа! Вы погибли ночью, в абсолютной темноте лабиринта"; 
 
-SENTENCES_RU["you win"] = "Да! Вам показалось, что вы выиграли, и что вы нашли выход!"; 
+SENTENCES_RU["you win"] = "Да! Внезапно вы проваливаетесь в скрытый люк. Неужели это выход?"; 
 
-SENTENCES_RU["hope after win"] = "Но Эксперимент продолжается... и вы снова очнулись в Лабиринте..."; 
+SENTENCES_RU["hope after win"] = "Вам показалось, что вы выиграли, и что вы нашли выход! Но Эксперимент продолжается..."; 
 
 SENTENCES_RU["hope after death"] = "Но Эксперимент продолжается... и надежда есть!"; 
 

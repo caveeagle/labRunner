@@ -167,12 +167,13 @@ function STEP()
 {
   if(Lab.stage != REST)
   {
-    Runner.step();
+    var f = Runner.step();
   }
   
   if(Lab.stage == DAY)
   {
-    Clock.step(); 
+    if(f)
+      Clock.step(); 
   }
 }
 

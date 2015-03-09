@@ -13,7 +13,16 @@ function INIT()
     Hero.init();
     setTimeout(Lab.dawn,3000);
     typeInfoMessage(sent("in the deep"));
-    $(document).keydown(keyChecker);// for Crome: not keypress, only keydown
+    $(document).keydown(keyChecker);// for Crome: not keypress, only keydown   
+    
+    $("#labContainer").swipe( {
+    swipe:function(event, direction, distance, duration, fingerCount, fingerData) 
+    {
+      swipeLab(direction);  
+    },
+     threshold:0 //Default is 75px, set to 0 (any distance triggers swipe)
+    });
+    
 }
 
 //  ############################ //
@@ -129,6 +138,26 @@ function keyChecker(e)
         STEP();
     }
 }
+
+function swipeLab(direction)
+{
+    var DIR;
+    
+    switch (direction) {
+        case "up":    DIR = UP;
+                      break;
+        case "right": DIR = RIGHT;
+                    break;
+        case "down":  DIR = DOWN;
+                    break;
+        case "left": DIR = LEFT ;
+                    break; 
+        default: return false;
+    }
+    
+    Runner.direction = DIR;
+    STEP();
+}  
 
 //  ############################ //
 //       Main step section       //

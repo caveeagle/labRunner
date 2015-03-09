@@ -13,7 +13,7 @@ function INIT()
     Hero.init();
     setTimeout(Lab.dawn,3000);
     typeInfoMessage(sent("in the deep"));
-    $(document).keypress(keyChecker);
+    $(document).keydown(keyChecker);// for Crome: not keypress, only keydown
 }
 
 //  ############################ //

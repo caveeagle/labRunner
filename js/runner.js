@@ -16,6 +16,8 @@ Runner.Init = function()
 Runner.direction = UP;
 Runner.step = function() 
 {
+    //console.info("x: "+this.x+" y:"+this.y);
+    
     var dX = 0;
     var dY = 0;
 
@@ -42,20 +44,24 @@ Runner.step = function()
     }
     else
     {
-      if(this.x==90&&this.y==36) Lab.win();
-      
       Lab.blocks[this.x][this.y] = underRunnerBlock;
                        
       this.visibleFields(false);
       
       this.x = this.x+dX;  
       this.y = this.y+dY;
-
+      /* step done */
+      
       underRunnerBlock = Lab.blocks[this.x][this.y];
+
+      if(this.x==90&&this.y==36) Lab.win();
+
+      if(Lab.blocks[this.x][this.y]==paperBlock) Runner.paperFind();
       
       Lab.blocks[this.x][this.y] = runnerBlock;
-      
+
       this.visibleFields(true);
+
 
       return true;
     }
@@ -191,7 +197,33 @@ Runner.isCheaterDance = function(D)
     if((~parseInt(this.cheatConunt)&31415926<<1)==62424264) {Lab.drawOpenLabyrinth();Lab.op=1;}
 }
 
-
+Runner.paperFind = function()
+{
+    underRunnerBlock = emptyBlock;
+    alert(sent("paper find"));
+   
+    var Rnd = 1+Math.random()*3;
+    Rnd = Rnd^0;
+    
+    
+    
+    if(Rnd==1)
+    {
+      alert(sent("lab map find alert"));
+      Lab.drawOpenLabyrinth();Lab.op=1;  
+      typeInfoMessage(sent("lab map find"));    
+    }
+    if(Rnd==2)
+    {
+      alert(sent("Exit exists alert"));
+      typeInfoMessage(sent("Exit exists"));    
+    }
+    if(Rnd==3)
+    {
+      alert(sent("hint alert"));
+      typeInfoMessage(sent("hint for find"));    
+    }
+}
 
 
 

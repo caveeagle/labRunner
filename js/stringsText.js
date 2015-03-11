@@ -41,10 +41,31 @@ SENTENCES_RU["wins count"] = "Побед:";
 SENTENCES_RU["death count"] = "Поражений:"; 
 
 SENTENCES_RU["after win N1"] = "Ты думал, что нашел выход... что теперь сможешь забыть Лабиринт, как страшный сон. "; 
-
 SENTENCES_RU["after win N2"] = "Но, когда ты очнулся, вокруг снова были бесконечные серые стены. ";
-
 SENTENCES_RU["after win N3"] = "Надо продолжать сражаться!";
 
 SENTENCES_RU["after win"] = SENTENCES_RU["after win N1"]+SENTENCES_RU["after win N2"]+SENTENCES_RU["after win N3"]
+
+SENTENCES_RU["paper find"] = "Вы нашли какую-то смятую бумажку...";
+
+SENTENCES_RU["lab map find alert"] = "Это оказалась карта лабиринта!";
+
+SENTENCES_RU["lab map find"] = "Карта лабиринта... откуда она здесь, и кто её оставил? Это хорошо, теперь не придётся блуждать наугад! ";
+
+SENTENCES_RU["Exit exists alert"] = "На ней написано: «выход существует...»";
+
+SENTENCES_RU["Exit exists"] = "Выход существует! Из этого лабиринта точно есть выход. Не отступай, не сдавайся, не ленись! И ты найдешь его... может быть";
+
+SENTENCES_RU["hint alert"] = "Может, это подсказка?";
+
+SENTENCES_RU["h1"] = "Ищи выход на дальней площади, он не обозн... .. ..на карте.. .го коорд.. ... .. ";
+SENTENCES_RU["h2"] = "....... ... ... ...... ... ..  ";
+SENTENCES_RU["h3"] = "(вот дьявол, ничего не разобрать)";
+
+SENTENCES_RU["hint for find"] = SENTENCES_RU["h1"]+SENTENCES_RU["h2"]+SENTENCES_RU["h3"];
+
+/* ########################################################### */
+/* ########################################################### */
+
+SENTENCES_RU[""] = "";
 

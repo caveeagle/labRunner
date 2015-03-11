@@ -54,7 +54,7 @@ Lab.clearLabyrinth = function()
         this.blocks[mainRoomXmin][j] = wallBlock;
         this.blocks[mainRoomXmax][j] = wallBlock;
     } 
-    
+    Lab.op=0;
 } 
  
 Lab.drawOpenLabyrinth = function()
@@ -248,8 +248,23 @@ Lab.makeLabyrinth = function()
             }
         }
         
-        this.blocks[5][4] = wellBlock;
-        this.blocks[44][14] = wellBlock;
+        // Add papers block 
+        var RX,RY;
+        while(true)
+        {
+            RX = 32+Math.random()*12; //x [32,44) 
+            RX = RX^0; // округление
+            RY = 12+Math.random()*8; //x [12,20) 
+            RY = RY^0; // округление            
+            
+            if( this.blocks[RX][RY] == emptyBlock ) 
+            {
+                this.blocks[RX][RY] = paperBlock;
+                break;
+            }
+        }
+        
+        
 }
 
 Lab.drawHiddenLabyrinth = function()

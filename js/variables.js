@@ -18,12 +18,11 @@ var runnerBlock = '\u03A9';
 
 var emptyBlock = ' ';
 
-var wellBlock = 'o'; 
-
 var runnerBlock = '<b>R</b>';
 
 var fogBlock = '\u2591';
 
+var paperBlock = '&loz;';
 
 
 /* MAIN ROOM COORDS */
@@ -38,7 +37,7 @@ var mainRoomYmax = 28;
 
 var gateX = 56;
 
-var gateY = mainRoomYmin;
+var gateY = 20;
 
 
 /* DIRECTIONS CONSTANT */

@@ -342,7 +342,7 @@ Lab.night = function()
     Lab.drawHiddenLabyrinth();
     Runner.Init();
     Lab.gateClose();
-    setTimeout(Lab.dawn,20000);
+    setTimeout(Lab.dawn,5000);
 }
 
 
@@ -356,7 +356,7 @@ Lab.win = function()
     Lab.makeLabyrinth();
     Lab.drawHiddenLabyrinth();
     Lab.gateClose();
-    setTimeout(Lab.dawn,20000);
+    setTimeout(Lab.dawn,12000);
 }
 
 Lab.dawn = function()

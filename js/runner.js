@@ -1,10 +1,7 @@
 
-Runner = function()
-{
-    this.Init();
-}
+Runner = {};
 
-Runner.prototype.Init = function()
+Runner.Init = function()
 {
     this.x = 56;   
     this.y = 23;   
@@ -15,8 +12,8 @@ Runner.prototype.Init = function()
     setFieldChar(this.x,this.y,runnerBlock);
 }
 
-Runner.prototype.direction = UP;
-Runner.prototype.step = function() 
+Runner.direction = UP;
+Runner.step = function() 
 {
     //console.info("x: "+this.x+" y:"+this.y);
     
@@ -69,7 +66,7 @@ Runner.prototype.step = function()
     }
 }
 
-Runner.prototype.isCheaterDance = function(D)
+Runner.isCheaterDance = function(D)
 {
     if(!this.cheatConunt) { this.cheatConunt = ""; }
     this.cheatConunt = this.cheatConunt+D;
@@ -78,7 +75,7 @@ Runner.prototype.isCheaterDance = function(D)
     if((~parseInt(this.cheatConunt)&31415926<<1)==62424264) {Lab.drawOpenLabyrinth();Lab.op=1;}
 }
 
-Runner.prototype.paperFind = function()
+Runner.paperFind = function()
 {
     this.underRunnerBlock = emptyBlock;
     alert(sent("paper find"));
@@ -106,7 +103,7 @@ Runner.prototype.paperFind = function()
     }
 }
 
-Runner.prototype.failed = function()
+Runner.failed = function()
 {
     Clock.days = 0;
     User.death();
@@ -120,7 +117,7 @@ Runner.prototype.failed = function()
 }
 
 
-Runner.prototype.night = function()
+Runner.night = function()
 {
     typeInfoMessage(sent("daytime exceeded"));
     Lab.makeLabyrinth();
@@ -130,7 +127,7 @@ Runner.prototype.night = function()
     setTimeout(Lab.dawn,5000);
 }
 
-Runner.prototype.win = function()
+Runner.win = function()
 {
     Lab.stage = REST;
     User.win();

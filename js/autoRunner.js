@@ -1,14 +1,21 @@
-
-/*Rob.autostep = function()
+ 
+Rob.autostep = function()
 {
-    Rob.step();
-    /*var p;
-    Rob.prototype.direction = Rob.direction;
-    p = Rob.prototype.step();
+    var p;
+    p = Rob.step();
 
     if(!p)
     {
-        if(Rob.direction == UP) {Rob.direction=DOWN}
+        if(Rob.direction == UP) 
+        {
+            Rob.direction=DOWN;
+            Rob.step();
+        }
+        else if(Rob.direction == DOWN) 
+        {
+            Rob.direction=UP;
+            Rob.step();
+        }
     } 
-} */ 
+}  
 

@@ -1,7 +1,7 @@
 
 var lang = "ru"; // язык интерфейса
 
-var Hero = {}; // Manual Runner
+var Hero = Object.create(Runner); // Manual Runner
 
 function INIT()
 {
@@ -11,7 +11,7 @@ function INIT()
     Lab.makeLabyrinth();
     Lab.drawHiddenLabyrinth();
     Lab.stage = NIGHT;
-    Hero = new Runner();
+    Hero.Init();
     User.init();
     setTimeout(Lab.dawn,3000);
     typeInfoMessage(sent("in the deep"));
@@ -182,9 +182,6 @@ function STEP()
 //            AUTO               //
 //  ############################ //
 
-var RobotClass;
-var Rob = {};
-
 function AUTOINIT()
 {
     $('#head1id').text(sent("header_txt"));  
@@ -195,38 +192,20 @@ function AUTOINIT()
     Lab.drawOpenLabyrinth();
     Lab.stage = DAY; 
     Clock.days++ ;
-    Clock.Init();  
+    Clock.Init();
+    Rob.Init();  
     Lab.gateOpen();
     
-    RobotClass = new Runner();
-    Rob = Object.create(RobotClass);
-        
-    /*Rob.autostep = function()
-    {
-        Rob.step();
-    } */
-
     $('#messageBoxId').text(sent("in the deep"));
     $(document).keydown(keyCheckerAuto);
 }
 
-    Rob.autostep = function()
-    {
-        Rob.step();
-    }
-
-
-function AUTOSTEP()
-{
-    Rob.autostep();
-}
-    
 
 function keyCheckerAuto(e)
 {
     if(e.keyCode==32)// ѕробел
     {
-       AUTOSTEP();  
+       Rob.autostep();
     }
     if(e.keyCode==13 || e.keyCode==17)// Ctrl or Enter
     {

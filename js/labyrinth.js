@@ -307,10 +307,22 @@ Lab.drawHiddenLabyrinth = function()
     }
 }
 
+Lab.outsideRoom = function(cx,cy) // Внутри безопасной комнаты
+{
+    if( cx > mainRoomXmin-1 && cx < mainRoomXmax+1 &&
+        cy > mainRoomYmin-1 && cy < mainRoomYmax+1 )
+        {
+            return false;
+        }
+    else
+        {
+            return true;
+        }
+}
 
 Lab.daytimeExceeded = function()
 {
-   if(Runner.outsideRoom(Runner.x,Runner.y)||(Runner.x==gateX&&Runner.y==gateY))
+   if(Lab.outsideRoom(Runner.x,Runner.y)||(Runner.x==gateX&&Runner.y==gateY))
    {
         Lab.failed();
    }

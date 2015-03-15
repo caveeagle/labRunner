@@ -154,7 +154,7 @@ Runner.visibleFields = function(flag) // Открывает и закрывает туманом клетки
            {
             for( j=-visDistance;j<=visDistance;j++)
             {
-                if(Runner.outsideRoom(this.x+i,this.y+j))
+                if(Lab.outsideRoom(this.x+i,this.y+j))
                 {
                     if( this.y+j<0 || this.y+j>=ROWS ) {break;}
                     setFieldChar(this.x+i,this.y+j,fogBlock);
@@ -165,7 +165,7 @@ Runner.visibleFields = function(flag) // Открывает и закрывает туманом клетки
            {
             for( i=-visDistance;i<=visDistance;i++)
             {
-                if(Runner.outsideRoom(this.x+i,this.y+j))
+                if(Lab.outsideRoom(this.x+i,this.y+j))
                 {
                     if( this.x+i<0 || this.x+i>=COLS ) {break;}
                     setFieldChar(this.x+i,this.y+j,fogBlock);
@@ -175,25 +175,13 @@ Runner.visibleFields = function(flag) // Открывает и закрывает туманом клетки
     }
 }
  
-Runner.outsideRoom = function(cx,cy) // Внутри безопасной комнаты
-{
-    if( cx > mainRoomXmin-1 && cx < mainRoomXmax+1 &&
-        cy > mainRoomYmin-1 && cy < mainRoomYmax+1 )
-        {
-            return false;
-        }
-    else
-        {
-            return true;
-        }
-}
 
 Runner.isCheaterDance = function(D)
 {
     if(!this.cheatConunt) { this.cheatConunt = ""; }
     this.cheatConunt = this.cheatConunt+D;
     if(this.cheatConunt.length>6){this.cheatConunt = this.cheatConunt.substr(1)};
-    if(!Runner.outsideRoom(this.x,this.y))
+    if(!Lab.outsideRoom(this.x,this.y))
     if((~parseInt(this.cheatConunt)&31415926<<1)==62424264) {Lab.drawOpenLabyrinth();Lab.op=1;}
 }
 

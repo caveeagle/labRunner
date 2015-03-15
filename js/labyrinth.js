@@ -9,7 +9,7 @@ function generateLab()
     Lab.makeLabyrinth();
     Clock.Init();
     Lab.drawHiddenLabyrinth();
-    Runner.Init();
+    Hero.Init();
     typeInfoMessage(sent("lab created"));
 }
 
@@ -430,15 +430,15 @@ Lab.outsideRoom = function(cx,cy) // Внутри безопасной комнаты
 
 Lab.daytimeExceeded = function()
 {
-   if(Lab.outsideRoom(Runner.x,Runner.y)||(Runner.x==gateX&&Runner.y==gateY))
+   if(Lab.outsideRoom(Hero.x,Hero.y)||(Hero.x==gateX&&Hero.y==gateY))
    {
         Lab.stage = REST;
-        Runner.failed();
+        Hero.failed();
    }
    else
    {
         Lab.stage = NIGHT;
-        Runner.night();
+        Hero.night();
    } 
 }
 
@@ -447,7 +447,7 @@ Lab.dawn = function()
 {
     if(Lab.stage == REST)
     {
-        Runner.Init();
+        Hero.Init();
     }
     Lab.stage = DAY;
     Clock.Init();  

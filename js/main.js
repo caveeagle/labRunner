@@ -1,6 +1,8 @@
 
 var lang = "ru"; // язык интерфейса
 
+var Hero = {};
+
 function INIT()
 {
     $('#head1id').text(sent("header_txt"));  
@@ -9,8 +11,8 @@ function INIT()
     Lab.makeLabyrinth();
     Lab.drawHiddenLabyrinth();
     Lab.stage = NIGHT;
-    Runner.Init();
-    Hero.init();
+    Hero = new Runner();
+    User.init();
     setTimeout(Lab.dawn,3000);
     typeInfoMessage(sent("in the deep"));
     $(document).keydown(keyChecker);// for Crome: not keypress, only keydown   
@@ -134,7 +136,7 @@ function keyChecker(e)
     
     if(DIR>=1&&DIR<=4)
     {
-        Runner.direction = DIR;
+        Hero.direction = DIR;
         STEP();
     }
 }
@@ -155,7 +157,7 @@ function swipeLab(direction)
         default: return false;
     }
     
-    Runner.direction = DIR;
+    Hero.direction = DIR;
     STEP();
 }  
 
@@ -167,7 +169,7 @@ function STEP()
 {
   if(Lab.stage != REST)
   {
-    var f = Runner.step();
+    var f = Hero.step();
   }
   
   if(Lab.stage == DAY)

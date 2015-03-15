@@ -1,7 +1,7 @@
 
-var Hero = {};
+var User = {};
 
-Hero.init = function()
+User.init = function()
 {
     if(typeof $.cookie('hero.wins') != 'undefined' )
     {
@@ -25,28 +25,28 @@ Hero.init = function()
     this.typeStats();
 }
 
-Hero.typeStats = function()
+User.typeStats = function()
 {   
     var count_str = sent("wins count")+" "+this.wins+"&nbsp;&nbsp;&nbsp;&nbsp;";
     count_str = count_str+sent("death count")+" "+this.deaths;
     $("#wincountBoxId").html(count_str);
 }
 
-Hero.death = function()
+User.death = function()
 {
    this.deaths = this.deaths+1;
-   Hero.saveStats();
-   Hero.typeStats();
+   User.saveStats();
+   User.typeStats();
 }
 
-Hero.win = function()
+User.win = function()
 {
    this.wins = this.wins+1;
-   Hero.saveStats();
-   Hero.typeStats();
+   User.saveStats();
+   User.typeStats();
 }
 
-Hero.saveStats = function()
+User.saveStats = function()
 {
     $.cookie('hero.wins',this.wins);
     $.cookie('hero.deaths',this.deaths);

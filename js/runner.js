@@ -1,19 +1,22 @@
 
-var Runner = {};
+Runner = function()
+{
+    this.Init();
+}
 
-Runner.Init = function()
+Runner.prototype.Init = function()
 {
     this.x = 56;   
     this.y = 23;   
     
-    Runner.underRunnerBlock = Lab.blocks[this.x][this.y];
+    this.underRunnerBlock = Lab.blocks[this.x][this.y];
     Lab.blocks[this.x][this.y] = runnerBlock; 
     
     setFieldChar(this.x,this.y,runnerBlock);
 }
 
-Runner.direction = UP;
-Runner.step = function() 
+Runner.prototype.direction = UP;
+Runner.prototype.step = function() 
 {
     //console.info("x: "+this.x+" y:"+this.y);
     
@@ -33,7 +36,7 @@ Runner.step = function()
                     return false;
     }        
     
-    Runner.isCheaterDance(Runner.direction);
+    this.isCheaterDance(this.direction);
     
     var chNext = Lab.blocks[this.x+dX][this.y+dY];
     
@@ -43,30 +46,30 @@ Runner.step = function()
     }
     else
     {
-      Lab.blocks[this.x][this.y] = Runner.underRunnerBlock;
+      Lab.blocks[this.x][this.y] = this.underRunnerBlock;
                        
-      Lab.visibleFields(Runner,false);
+      Lab.visibleFields(this,false);
       
       this.x = this.x+dX;  
       this.y = this.y+dY;
       /* step done */
       
-      Runner.underRunnerBlock = Lab.blocks[this.x][this.y];
+      this.underRunnerBlock = Lab.blocks[this.x][this.y];
 
-      if(this.x==90&&this.y==36) Runner.win();
+      if(this.x==90&&this.y==36) this.win();
 
-      if(Lab.blocks[this.x][this.y]==paperBlock) Runner.paperFind();
+      if(Lab.blocks[this.x][this.y]==paperBlock) this.paperFind();
       
       Lab.blocks[this.x][this.y] = runnerBlock;
 
-      Lab.visibleFields(Runner,true);
+      Lab.visibleFields(this,true);
 
 
       return true;
     }
 }
 
-Runner.isCheaterDance = function(D)
+Runner.prototype.isCheaterDance = function(D)
 {
     if(!this.cheatConunt) { this.cheatConunt = ""; }
     this.cheatConunt = this.cheatConunt+D;
@@ -75,9 +78,9 @@ Runner.isCheaterDance = function(D)
     if((~parseInt(this.cheatConunt)&31415926<<1)==62424264) {Lab.drawOpenLabyrinth();Lab.op=1;}
 }
 
-Runner.paperFind = function()
+Runner.prototype.paperFind = function()
 {
-    Runner.underRunnerBlock = emptyBlock;
+    this.underRunnerBlock = emptyBlock;
     alert(sent("paper find"));
    
     var Rnd = 1+Math.random()*3;
@@ -103,9 +106,9 @@ Runner.paperFind = function()
     }
 }
 
-Runner.failed = function()
+Runner.prototype.failed = function()
 {
-    Hero.death();
+    User.death();
     alert(sent("you lose"));
     alert(sent("hope after death"));
     typeInfoMessage(sent("outside at night"));
@@ -116,20 +119,20 @@ Runner.failed = function()
 }
 
 
-Runner.night = function()
+Runner.prototype.night = function()
 {
     typeInfoMessage(sent("daytime exceeded"));
     Lab.makeLabyrinth();
     Lab.drawHiddenLabyrinth();
-    Runner.Init();
+    this.Init();
     Lab.gateClose();
     setTimeout(Lab.dawn,5000);
 }
 
-Runner.win = function()
+Runner.prototype.win = function()
 {
     Lab.stage = REST;
-    Hero.win();
+    User.win();
     alert(sent("you win")); 
     alert(sent("hope after win"));
     typeInfoMessage(sent("after win"));

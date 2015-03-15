@@ -46,7 +46,7 @@ Runner.step = function()
     {
       Lab.blocks[this.x][this.y] = underRunnerBlock;
                        
-      this.visibleFields(false);
+      Lab.visibleFields(Runner,false);
       
       this.x = this.x+dX;  
       this.y = this.y+dY;
@@ -60,14 +60,14 @@ Runner.step = function()
       
       Lab.blocks[this.x][this.y] = runnerBlock;
 
-      this.visibleFields(true);
+      Lab.visibleFields(Runner,true);
 
 
       return true;
     }
 }
 
-Runner.visibleFields = function(flag) // Открывает и закрывает туманом клетки
+Lab.visibleFields = function(thisRunner,flag) // Открывает и закрывает туманом клетки
 {
     var visDistance = 3;
     
@@ -78,38 +78,38 @@ Runner.visibleFields = function(flag) // Открывает и закрывает туманом клетки
            {
             for( j=-1;j<=1;j++)
             {
-                setFieldChar(this.x+i,this.y+j, Lab.blocks[this.x+i][this.y+j]);
+                setFieldChar(thisRunner.x+i,thisRunner.y+j, Lab.blocks[thisRunner.x+i][thisRunner.y+j]);
             }
            }
            
-    switch (this.direction) {
+    switch (thisRunner.direction) {
         case UP:{
                     for(i=1;i<=visDistance;i++)
                     {
-                        if(this.y-i<0){break;}
+                        if(thisRunner.y-i<0){break;}
                         
-                        setFieldChar(this.x+1,this.y-i, Lab.blocks[this.x+1][this.y-i]);
-                        setFieldChar(this.x-1,this.y-i, Lab.blocks[this.x-1][this.y-i]);
-                        setFieldChar(this.x,this.y-i, Lab.blocks[this.x][this.y-i]);
+                        setFieldChar(thisRunner.x+1,thisRunner.y-i, Lab.blocks[thisRunner.x+1][thisRunner.y-i]);
+                        setFieldChar(thisRunner.x-1,thisRunner.y-i, Lab.blocks[thisRunner.x-1][thisRunner.y-i]);
+                        setFieldChar(thisRunner.x,thisRunner.y-i, Lab.blocks[thisRunner.x][thisRunner.y-i]);
 
-                        if( Lab.blocks[this.x+1][this.y-i]==wallBlock &&
-                            Lab.blocks[this.x-1][this.y-i]==wallBlock &&
-                            Lab.blocks[this.x][this.y-i]==wallBlock ) {break;}
+                        if( Lab.blocks[thisRunner.x+1][thisRunner.y-i]==wallBlock &&
+                            Lab.blocks[thisRunner.x-1][thisRunner.y-i]==wallBlock &&
+                            Lab.blocks[thisRunner.x][thisRunner.y-i]==wallBlock ) {break;}
                     }
                     break;
                 }
         case RIGHT:{
                     for(i=1;i<=visDistance;i++)
                     {
-                        if(this.x+i>=COLS){break;}
+                        if(thisRunner.x+i>=COLS){break;}
                         
-                        setFieldChar(this.x+i,this.y+1, Lab.blocks[this.x+i][this.y+1]);
-                        setFieldChar(this.x+i,this.y-1, Lab.blocks[this.x+i][this.y-1]);
-                        setFieldChar(this.x+i,this.y, Lab.blocks[this.x+i][this.y]);
+                        setFieldChar(thisRunner.x+i,thisRunner.y+1, Lab.blocks[thisRunner.x+i][thisRunner.y+1]);
+                        setFieldChar(thisRunner.x+i,thisRunner.y-1, Lab.blocks[thisRunner.x+i][thisRunner.y-1]);
+                        setFieldChar(thisRunner.x+i,thisRunner.y, Lab.blocks[thisRunner.x+i][thisRunner.y]);
 
-                        if( Lab.blocks[this.x+i][this.y+1]==wallBlock &&
-                            Lab.blocks[this.x+i][this.y-1]==wallBlock &&
-                            Lab.blocks[this.x+i][this.y]==wallBlock ) {break;}
+                        if( Lab.blocks[thisRunner.x+i][thisRunner.y+1]==wallBlock &&
+                            Lab.blocks[thisRunner.x+i][thisRunner.y-1]==wallBlock &&
+                            Lab.blocks[thisRunner.x+i][thisRunner.y]==wallBlock ) {break;}
                         
                     }
                     break;
@@ -117,30 +117,30 @@ Runner.visibleFields = function(flag) // Открывает и закрывает туманом клетки
         case DOWN:{
                     for(i=1;i<=visDistance;i++)
                     {
-                        if(this.y+i>=ROWS){break;}
+                        if(thisRunner.y+i>=ROWS){break;}
                         
-                        setFieldChar(this.x+1,this.y+i, Lab.blocks[this.x+1][this.y+i]);
-                        setFieldChar(this.x-1,this.y+i, Lab.blocks[this.x-1][this.y+i]);
-                        setFieldChar(this.x,this.y+i, Lab.blocks[this.x][this.y+i]);
+                        setFieldChar(thisRunner.x+1,thisRunner.y+i, Lab.blocks[thisRunner.x+1][thisRunner.y+i]);
+                        setFieldChar(thisRunner.x-1,thisRunner.y+i, Lab.blocks[thisRunner.x-1][thisRunner.y+i]);
+                        setFieldChar(thisRunner.x,thisRunner.y+i, Lab.blocks[thisRunner.x][thisRunner.y+i]);
 
-                        if( Lab.blocks[this.x+1][this.y+i]==wallBlock &&
-                            Lab.blocks[this.x-1][this.y+i]==wallBlock &&
-                            Lab.blocks[this.x][this.y+i]==wallBlock ) {break;}
+                        if( Lab.blocks[thisRunner.x+1][thisRunner.y+i]==wallBlock &&
+                            Lab.blocks[thisRunner.x-1][thisRunner.y+i]==wallBlock &&
+                            Lab.blocks[thisRunner.x][thisRunner.y+i]==wallBlock ) {break;}
                     }
                     break;
                 }
         case LEFT:{
                     for(i=1;i<=visDistance;i++)
                     {
-                        if(this.x-i<0){break;}
+                        if(thisRunner.x-i<0){break;}
                         
-                        setFieldChar(this.x-i,this.y+1, Lab.blocks[this.x-i][this.y+1]);
-                        setFieldChar(this.x-i,this.y-1, Lab.blocks[this.x-i][this.y-1]);
-                        setFieldChar(this.x-i,this.y, Lab.blocks[this.x-i][this.y]);
+                        setFieldChar(thisRunner.x-i,thisRunner.y+1, Lab.blocks[thisRunner.x-i][thisRunner.y+1]);
+                        setFieldChar(thisRunner.x-i,thisRunner.y-1, Lab.blocks[thisRunner.x-i][thisRunner.y-1]);
+                        setFieldChar(thisRunner.x-i,thisRunner.y, Lab.blocks[thisRunner.x-i][thisRunner.y]);
  
-                        if( Lab.blocks[this.x-i][this.y+1]==wallBlock &&
-                            Lab.blocks[this.x-i][this.y-1]==wallBlock &&
-                            Lab.blocks[this.x-i][this.y]==wallBlock ) {break;}
+                        if( Lab.blocks[thisRunner.x-i][thisRunner.y+1]==wallBlock &&
+                            Lab.blocks[thisRunner.x-i][thisRunner.y-1]==wallBlock &&
+                            Lab.blocks[thisRunner.x-i][thisRunner.y]==wallBlock ) {break;}
                         
                    }
                     break;
@@ -154,10 +154,10 @@ Runner.visibleFields = function(flag) // Открывает и закрывает туманом клетки
            {
             for( j=-visDistance;j<=visDistance;j++)
             {
-                if(Lab.outsideRoom(this.x+i,this.y+j))
+                if(Lab.outsideRoom(thisRunner.x+i,thisRunner.y+j))
                 {
-                    if( this.y+j<0 || this.y+j>=ROWS ) {break;}
-                    setFieldChar(this.x+i,this.y+j,fogBlock);
+                    if( thisRunner.y+j<0 || thisRunner.y+j>=ROWS ) {break;}
+                    setFieldChar(thisRunner.x+i,thisRunner.y+j,fogBlock);
                 }
             }
            }
@@ -165,10 +165,10 @@ Runner.visibleFields = function(flag) // Открывает и закрывает туманом клетки
            {
             for( i=-visDistance;i<=visDistance;i++)
             {
-                if(Lab.outsideRoom(this.x+i,this.y+j))
+                if(Lab.outsideRoom(thisRunner.x+i,thisRunner.y+j))
                 {
-                    if( this.x+i<0 || this.x+i>=COLS ) {break;}
-                    setFieldChar(this.x+i,this.y+j,fogBlock);
+                    if( thisRunner.x+i<0 || thisRunner.x+i>=COLS ) {break;}
+                    setFieldChar(thisRunner.x+i,thisRunner.y+j,fogBlock);
                 }
             }
            }

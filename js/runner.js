@@ -1,13 +1,12 @@
 
 var Runner = {};
-var underRunnerBlock;
 
 Runner.Init = function()
 {
     this.x = 56;   
     this.y = 23;   
     
-    underRunnerBlock = Lab.blocks[this.x][this.y];
+    Runner.underRunnerBlock = Lab.blocks[this.x][this.y];
     Lab.blocks[this.x][this.y] = runnerBlock; 
     
     setFieldChar(this.x,this.y,runnerBlock);
@@ -44,7 +43,7 @@ Runner.step = function()
     }
     else
     {
-      Lab.blocks[this.x][this.y] = underRunnerBlock;
+      Lab.blocks[this.x][this.y] = Runner.underRunnerBlock;
                        
       Lab.visibleFields(Runner,false);
       
@@ -52,9 +51,9 @@ Runner.step = function()
       this.y = this.y+dY;
       /* step done */
       
-      underRunnerBlock = Lab.blocks[this.x][this.y];
+      Runner.underRunnerBlock = Lab.blocks[this.x][this.y];
 
-      if(this.x==90&&this.y==36) Lab.win();
+      if(this.x==90&&this.y==36) Runner.win();
 
       if(Lab.blocks[this.x][this.y]==paperBlock) Runner.paperFind();
       
@@ -67,115 +66,6 @@ Runner.step = function()
     }
 }
 
-Lab.visibleFields = function(thisRunner,flag) // Открывает и закрывает туманом клетки
-{
-    var visDistance = 3;
-    
-    var i,j;
-    if(flag)
-    {
-           for( i=-1;i<=1;i++)
-           {
-            for( j=-1;j<=1;j++)
-            {
-                setFieldChar(thisRunner.x+i,thisRunner.y+j, Lab.blocks[thisRunner.x+i][thisRunner.y+j]);
-            }
-           }
-           
-    switch (thisRunner.direction) {
-        case UP:{
-                    for(i=1;i<=visDistance;i++)
-                    {
-                        if(thisRunner.y-i<0){break;}
-                        
-                        setFieldChar(thisRunner.x+1,thisRunner.y-i, Lab.blocks[thisRunner.x+1][thisRunner.y-i]);
-                        setFieldChar(thisRunner.x-1,thisRunner.y-i, Lab.blocks[thisRunner.x-1][thisRunner.y-i]);
-                        setFieldChar(thisRunner.x,thisRunner.y-i, Lab.blocks[thisRunner.x][thisRunner.y-i]);
-
-                        if( Lab.blocks[thisRunner.x+1][thisRunner.y-i]==wallBlock &&
-                            Lab.blocks[thisRunner.x-1][thisRunner.y-i]==wallBlock &&
-                            Lab.blocks[thisRunner.x][thisRunner.y-i]==wallBlock ) {break;}
-                    }
-                    break;
-                }
-        case RIGHT:{
-                    for(i=1;i<=visDistance;i++)
-                    {
-                        if(thisRunner.x+i>=COLS){break;}
-                        
-                        setFieldChar(thisRunner.x+i,thisRunner.y+1, Lab.blocks[thisRunner.x+i][thisRunner.y+1]);
-                        setFieldChar(thisRunner.x+i,thisRunner.y-1, Lab.blocks[thisRunner.x+i][thisRunner.y-1]);
-                        setFieldChar(thisRunner.x+i,thisRunner.y, Lab.blocks[thisRunner.x+i][thisRunner.y]);
-
-                        if( Lab.blocks[thisRunner.x+i][thisRunner.y+1]==wallBlock &&
-                            Lab.blocks[thisRunner.x+i][thisRunner.y-1]==wallBlock &&
-                            Lab.blocks[thisRunner.x+i][thisRunner.y]==wallBlock ) {break;}
-                        
-                    }
-                    break;
-                }
-        case DOWN:{
-                    for(i=1;i<=visDistance;i++)
-                    {
-                        if(thisRunner.y+i>=ROWS){break;}
-                        
-                        setFieldChar(thisRunner.x+1,thisRunner.y+i, Lab.blocks[thisRunner.x+1][thisRunner.y+i]);
-                        setFieldChar(thisRunner.x-1,thisRunner.y+i, Lab.blocks[thisRunner.x-1][thisRunner.y+i]);
-                        setFieldChar(thisRunner.x,thisRunner.y+i, Lab.blocks[thisRunner.x][thisRunner.y+i]);
-
-                        if( Lab.blocks[thisRunner.x+1][thisRunner.y+i]==wallBlock &&
-                            Lab.blocks[thisRunner.x-1][thisRunner.y+i]==wallBlock &&
-                            Lab.blocks[thisRunner.x][thisRunner.y+i]==wallBlock ) {break;}
-                    }
-                    break;
-                }
-        case LEFT:{
-                    for(i=1;i<=visDistance;i++)
-                    {
-                        if(thisRunner.x-i<0){break;}
-                        
-                        setFieldChar(thisRunner.x-i,thisRunner.y+1, Lab.blocks[thisRunner.x-i][thisRunner.y+1]);
-                        setFieldChar(thisRunner.x-i,thisRunner.y-1, Lab.blocks[thisRunner.x-i][thisRunner.y-1]);
-                        setFieldChar(thisRunner.x-i,thisRunner.y, Lab.blocks[thisRunner.x-i][thisRunner.y]);
- 
-                        if( Lab.blocks[thisRunner.x-i][thisRunner.y+1]==wallBlock &&
-                            Lab.blocks[thisRunner.x-i][thisRunner.y-1]==wallBlock &&
-                            Lab.blocks[thisRunner.x-i][thisRunner.y]==wallBlock ) {break;}
-                        
-                   }
-                    break;
-                }
-        }// End of switch        
-    }
-    else
-    {
-           if(Lab.op){return;}
-           for( i=-1;i<=1;i++)
-           {
-            for( j=-visDistance;j<=visDistance;j++)
-            {
-                if(Lab.outsideRoom(thisRunner.x+i,thisRunner.y+j))
-                {
-                    if( thisRunner.y+j<0 || thisRunner.y+j>=ROWS ) {break;}
-                    setFieldChar(thisRunner.x+i,thisRunner.y+j,fogBlock);
-                }
-            }
-           }
-           for( j=-1;j<=1;j++)
-           {
-            for( i=-visDistance;i<=visDistance;i++)
-            {
-                if(Lab.outsideRoom(thisRunner.x+i,thisRunner.y+j))
-                {
-                    if( thisRunner.x+i<0 || thisRunner.x+i>=COLS ) {break;}
-                    setFieldChar(thisRunner.x+i,thisRunner.y+j,fogBlock);
-                }
-            }
-           }
-    }
-}
- 
-
 Runner.isCheaterDance = function(D)
 {
     if(!this.cheatConunt) { this.cheatConunt = ""; }
@@ -187,7 +77,7 @@ Runner.isCheaterDance = function(D)
 
 Runner.paperFind = function()
 {
-    underRunnerBlock = emptyBlock;
+    Runner.underRunnerBlock = emptyBlock;
     alert(sent("paper find"));
    
     var Rnd = 1+Math.random()*3;
@@ -211,6 +101,42 @@ Runner.paperFind = function()
       alert(sent("hint alert"));
       typeInfoMessage(sent("hint for find"));    
     }
+}
+
+Runner.failed = function()
+{
+    Hero.death();
+    alert(sent("you lose"));
+    alert(sent("hope after death"));
+    typeInfoMessage(sent("outside at night"));
+    Lab.makeLabyrinth();
+    Lab.drawHiddenLabyrinth();
+    Lab.gateClose();
+    setTimeout(Lab.dawn,20000);
+}
+
+
+Runner.night = function()
+{
+    typeInfoMessage(sent("daytime exceeded"));
+    Lab.makeLabyrinth();
+    Lab.drawHiddenLabyrinth();
+    Runner.Init();
+    Lab.gateClose();
+    setTimeout(Lab.dawn,5000);
+}
+
+Runner.win = function()
+{
+    Lab.stage = REST;
+    Hero.win();
+    alert(sent("you win")); 
+    alert(sent("hope after win"));
+    typeInfoMessage(sent("after win"));
+    Lab.makeLabyrinth();
+    Lab.drawHiddenLabyrinth();
+    Lab.gateClose();
+    setTimeout(Lab.dawn,12000);
 }
 
 

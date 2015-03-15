@@ -307,6 +307,114 @@ Lab.drawHiddenLabyrinth = function()
     }
 }
 
+Lab.visibleFields = function(thisRunner,flag) // Открывает и закрывает туманом клетки
+{
+    var visDistance = 3;
+    
+    var i,j;
+    if(flag)
+    {
+           for( i=-1;i<=1;i++)
+           {
+            for( j=-1;j<=1;j++)
+            {
+                setFieldChar(thisRunner.x+i,thisRunner.y+j, Lab.blocks[thisRunner.x+i][thisRunner.y+j]);
+            }
+           }
+           
+    switch (thisRunner.direction) {
+        case UP:{
+                    for(i=1;i<=visDistance;i++)
+                    {
+                        if(thisRunner.y-i<0){break;}
+                        
+                        setFieldChar(thisRunner.x+1,thisRunner.y-i, Lab.blocks[thisRunner.x+1][thisRunner.y-i]);
+                        setFieldChar(thisRunner.x-1,thisRunner.y-i, Lab.blocks[thisRunner.x-1][thisRunner.y-i]);
+                        setFieldChar(thisRunner.x,thisRunner.y-i, Lab.blocks[thisRunner.x][thisRunner.y-i]);
+
+                        if( Lab.blocks[thisRunner.x+1][thisRunner.y-i]==wallBlock &&
+                            Lab.blocks[thisRunner.x-1][thisRunner.y-i]==wallBlock &&
+                            Lab.blocks[thisRunner.x][thisRunner.y-i]==wallBlock ) {break;}
+                    }
+                    break;
+                }
+        case RIGHT:{
+                    for(i=1;i<=visDistance;i++)
+                    {
+                        if(thisRunner.x+i>=COLS){break;}
+                        
+                        setFieldChar(thisRunner.x+i,thisRunner.y+1, Lab.blocks[thisRunner.x+i][thisRunner.y+1]);
+                        setFieldChar(thisRunner.x+i,thisRunner.y-1, Lab.blocks[thisRunner.x+i][thisRunner.y-1]);
+                        setFieldChar(thisRunner.x+i,thisRunner.y, Lab.blocks[thisRunner.x+i][thisRunner.y]);
+
+                        if( Lab.blocks[thisRunner.x+i][thisRunner.y+1]==wallBlock &&
+                            Lab.blocks[thisRunner.x+i][thisRunner.y-1]==wallBlock &&
+                            Lab.blocks[thisRunner.x+i][thisRunner.y]==wallBlock ) {break;}
+                        
+                    }
+                    break;
+                }
+        case DOWN:{
+                    for(i=1;i<=visDistance;i++)
+                    {
+                        if(thisRunner.y+i>=ROWS){break;}
+                        
+                        setFieldChar(thisRunner.x+1,thisRunner.y+i, Lab.blocks[thisRunner.x+1][thisRunner.y+i]);
+                        setFieldChar(thisRunner.x-1,thisRunner.y+i, Lab.blocks[thisRunner.x-1][thisRunner.y+i]);
+                        setFieldChar(thisRunner.x,thisRunner.y+i, Lab.blocks[thisRunner.x][thisRunner.y+i]);
+
+                        if( Lab.blocks[thisRunner.x+1][thisRunner.y+i]==wallBlock &&
+                            Lab.blocks[thisRunner.x-1][thisRunner.y+i]==wallBlock &&
+                            Lab.blocks[thisRunner.x][thisRunner.y+i]==wallBlock ) {break;}
+                    }
+                    break;
+                }
+        case LEFT:{
+                    for(i=1;i<=visDistance;i++)
+                    {
+                        if(thisRunner.x-i<0){break;}
+                        
+                        setFieldChar(thisRunner.x-i,thisRunner.y+1, Lab.blocks[thisRunner.x-i][thisRunner.y+1]);
+                        setFieldChar(thisRunner.x-i,thisRunner.y-1, Lab.blocks[thisRunner.x-i][thisRunner.y-1]);
+                        setFieldChar(thisRunner.x-i,thisRunner.y, Lab.blocks[thisRunner.x-i][thisRunner.y]);
+ 
+                        if( Lab.blocks[thisRunner.x-i][thisRunner.y+1]==wallBlock &&
+                            Lab.blocks[thisRunner.x-i][thisRunner.y-1]==wallBlock &&
+                            Lab.blocks[thisRunner.x-i][thisRunner.y]==wallBlock ) {break;}
+                        
+                   }
+                    break;
+                }
+        }// End of switch        
+    }
+    else
+    {
+           if(Lab.op){return;}
+           for( i=-1;i<=1;i++)
+           {
+            for( j=-visDistance;j<=visDistance;j++)
+            {
+                if(Lab.outsideRoom(thisRunner.x+i,thisRunner.y+j))
+                {
+                    if( thisRunner.y+j<0 || thisRunner.y+j>=ROWS ) {break;}
+                    setFieldChar(thisRunner.x+i,thisRunner.y+j,fogBlock);
+                }
+            }
+           }
+           for( j=-1;j<=1;j++)
+           {
+            for( i=-visDistance;i<=visDistance;i++)
+            {
+                if(Lab.outsideRoom(thisRunner.x+i,thisRunner.y+j))
+                {
+                    if( thisRunner.x+i<0 || thisRunner.x+i>=COLS ) {break;}
+                    setFieldChar(thisRunner.x+i,thisRunner.y+j,fogBlock);
+                }
+            }
+           }
+    }
+}
+ 
 Lab.outsideRoom = function(cx,cy) // Внутри безопасной комнаты
 {
     if( cx > mainRoomXmin-1 && cx < mainRoomXmax+1 &&
@@ -324,52 +432,16 @@ Lab.daytimeExceeded = function()
 {
    if(Lab.outsideRoom(Runner.x,Runner.y)||(Runner.x==gateX&&Runner.y==gateY))
    {
-        Lab.failed();
+        Lab.stage = REST;
+        Runner.failed();
    }
    else
    {
-        Lab.night();
+        Lab.stage = NIGHT;
+        Runner.night();
    } 
 }
 
-Lab.failed = function()
-{
-    Hero.death();
-    this.stage = REST;
-    alert(sent("you lose"));
-    alert(sent("hope after death"));
-    typeInfoMessage(sent("outside at night"));
-    Lab.makeLabyrinth();
-    Lab.drawHiddenLabyrinth();
-    Lab.gateClose();
-    setTimeout(Lab.dawn,20000);
-}
-
-
-Lab.night = function()
-{
-    this.stage = NIGHT;
-    typeInfoMessage(sent("daytime exceeded"));
-    Lab.makeLabyrinth();
-    Lab.drawHiddenLabyrinth();
-    Runner.Init();
-    Lab.gateClose();
-    setTimeout(Lab.dawn,5000);
-}
-
-
-Lab.win = function()
-{
-    this.stage = REST;
-    Hero.win();
-    alert(sent("you win")); 
-    alert(sent("hope after win"));
-    typeInfoMessage(sent("after win"));
-    Lab.makeLabyrinth();
-    Lab.drawHiddenLabyrinth();
-    Lab.gateClose();
-    setTimeout(Lab.dawn,12000);
-}
 
 Lab.dawn = function()
 {

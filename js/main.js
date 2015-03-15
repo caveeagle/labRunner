@@ -24,7 +24,6 @@ function INIT()
     },
      threshold:0 //Default is 75px, set to 0 (any distance triggers swipe)
     });
-    
 }
 
 //  ############################ //
@@ -179,4 +178,59 @@ function STEP()
   }
 }
 
+//  ############################ //
+//            AUTO               //
+//  ############################ //
+
+var RobotClass;
+var Rob = {};
+
+function AUTOINIT()
+{
+    $('#head1id').text(sent("header_txt"));  
+    initLabfield();
+    Lab.initLabyrinth();
+    Lab.makeLabyrinth();
+    Lab.op=1;
+    Lab.drawOpenLabyrinth();
+    Lab.stage = DAY; 
+    Clock.days++ ;
+    Clock.Init();  
+    Lab.gateOpen();
+    
+    RobotClass = new Runner();
+    Rob = Object.create(RobotClass);
+        
+    /*Rob.autostep = function()
+    {
+        Rob.step();
+    } */
+
+    $('#messageBoxId').text(sent("in the deep"));
+    $(document).keydown(keyCheckerAuto);
+}
+
+    Rob.autostep = function()
+    {
+        Rob.step();
+    }
+
+
+function AUTOSTEP()
+{
+    Rob.autostep();
+}
+    
+
+function keyCheckerAuto(e)
+{
+    if(e.keyCode==32)// Пробел
+    {
+       AUTOSTEP();  
+    }
+    if(e.keyCode==13 || e.keyCode==17)// Ctrl or Enter
+    {
+         alert("Sorry, auto-mode not available now");
+    }
+} 
 

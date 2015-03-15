@@ -1,0 +1,80 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<title>Labyrinth</title>
+
+<link href="css/styles.css" rel="stylesheet">
+
+<script type="text/javascript" src="libs/jquery.js"></script>
+
+<script type="text/javascript" src="libs/jquery.cookie.mod.js"></script>
+
+<script type="text/javascript" src="libs/jquery.touchSwipe.min.js"></script>
+
+<script type="text/javascript" src="js/main.js"></script>
+
+<script type="text/javascript" src="js/clock.js"></script>
+
+<script type="text/javascript" src="js/stringsText.js"></script>
+
+<script type="text/javascript" src="js/labyrinth.js"></script>
+
+<script type="text/javascript" src="js/variables.js"></script>
+
+<script type="text/javascript" src="js/runner.js"></script>
+
+<script type="text/javascript" src="js/autoRunner.js"></script>
+
+<script type="text/javascript" src="js/user.js"></script>
+
+<script>
+$(window).load(function () 
+{
+  AUTOINIT();
+});
+</script>
+
+</head>
+
+<body>
+    
+<table class="mainspace" align=center height=800 width=1200 border=1 >
+  <tr>
+    <td class="infofield">
+        
+        <div class="head1" id=head1id align=center></div>
+        
+        <br><br>
+
+        <br><br>
+
+        <div class=messageBox id=messageBoxId></div> 
+
+        <br><br>
+
+        <div align=center class=clockBox id=clockBoxId></div> 
+
+        <br><br>
+
+        <div align=center class=daycountBox id=daycountBoxId></div> 
+
+        <br><br>
+
+        <div align=center class=wincountBox id=wincountBoxId></div> 
+
+        
+    </td>
+    <td width=900>
+       
+       <span id=labContainer>
+       </span>
+        
+    </td>
+  </tr>
+</table>
+
+
+</body>
+
+</html>

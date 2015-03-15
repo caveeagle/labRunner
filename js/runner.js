@@ -9,7 +9,7 @@ Runner.prototype.Init = function()
     this.x = 56;   
     this.y = 23;   
     
-    this.underRunnerBlock = Lab.blocks[this.x][this.y];
+    this.underRunnerBlock = emptyBlock;
     Lab.blocks[this.x][this.y] = runnerBlock; 
     
     setFieldChar(this.x,this.y,runnerBlock);
@@ -108,6 +108,7 @@ Runner.prototype.paperFind = function()
 
 Runner.prototype.failed = function()
 {
+    Clock.days = 0;
     User.death();
     alert(sent("you lose"));
     alert(sent("hope after death"));
@@ -135,8 +136,11 @@ Runner.prototype.win = function()
     User.win();
     alert(sent("you win")); 
     alert(sent("hope after win"));
-    typeInfoMessage(sent("after win"));
+    typeInfoMessage(sent("after win")); 
     Lab.makeLabyrinth();
+    this.x = 56;   
+    this.y = 23;   
+    this.underRunnerBlock = emptyBlock;
     Lab.drawHiddenLabyrinth();
     Lab.gateClose();
     setTimeout(Lab.dawn,12000);

@@ -1,7 +1,7 @@
 
 var lang = "ru"; // язык интерфейса
 
-var Hero = {};
+var Hero = {}; // Manual Runner
 
 function INIT()
 {

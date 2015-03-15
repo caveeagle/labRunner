@@ -450,7 +450,9 @@ Lab.dawn = function()
         Hero.Init();
     }
     Lab.stage = DAY;
+    Clock.days++ ;
     Clock.Init();  
+    User.saveStats(); // save days count
     Lab.gateOpen();
     typeInfoMessage(sent("lab created"));
 }

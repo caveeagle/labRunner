@@ -22,6 +22,18 @@ User.init = function()
         this.deaths = 0;
         $.cookie('hero.deaths',0); 
     }
+
+    if(typeof $.cookie('hero.days') != 'undefined' )
+    {
+        Clock.days = parseInt($.cookie('hero.days'));
+        Clock.days--;
+        if(Clock.days<0)Clock.days=0;
+    }
+    else
+    {
+        $.cookie('hero.days',Clock.days); 
+    }
+
     this.typeStats();
 }
 
@@ -48,6 +60,7 @@ User.win = function()
 
 User.saveStats = function()
 {
+    $.cookie('hero.days',Clock.days);
     $.cookie('hero.wins',this.wins);
     $.cookie('hero.deaths',this.deaths);
 }

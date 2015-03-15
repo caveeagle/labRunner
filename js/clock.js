@@ -21,8 +21,6 @@ Clock.Init = function()
     this.hours   = 12;
     this.minutes =  0;
     
-    this.days = this.days+1;
-    
     var count_str =  sent("days count");
     count_str = count_str.replace("%s",this.days);
     

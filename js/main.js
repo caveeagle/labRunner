@@ -125,6 +125,17 @@ function typeInfoMessage(message)
 }
 
 //  ############################ //
+//         MISC  FUNCTIONS       //
+//  ############################ //
+
+function invertDirection(D)
+{
+    D = D+2;
+    if(D>4){D=D-4};
+    return D;
+}
+
+//  ############################ //
 //       Keyboard section        //
 //  ############################ //
 
@@ -158,6 +169,7 @@ function swipeLab(direction)
     
     Hero.direction = DIR;
     STEP();
+    return true;
 }  
 
 //  ############################ //
@@ -194,10 +206,11 @@ function AUTOINIT()
     Clock.days++ ;
     Clock.Init();
     Rob.Init();  
+    Rob.AutoInit();  
     Lab.gateOpen();
     
     $('#messageBoxId').text(sent("in the deep"));
-    $(document).keydown(keyCheckerAuto);
+    $(document).keydown(keyCheckerAuto); 
 }
 
 

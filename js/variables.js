@@ -14,7 +14,7 @@ var DAYSTEPS = 180; //  оличество шагов за день (не менее 12 и не более 720)
 
 var wallBlock = '\u2592';
 
-var runnerBlock = '\u03A9';
+/* var runnerBlock = '\u03A9'; */
 
 var emptyBlock = ' ';
 
@@ -23,6 +23,10 @@ var runnerBlock = '<b>R</b>';
 var fogBlock = '\u2591';
 
 var paperBlock = '&loz;';
+
+var wellBlock = 'o';
+
+var crossBlock = '&#215;';
 
 
 /* MAIN ROOM COORDS */
@@ -38,6 +42,12 @@ var mainRoomYmax = 28;
 var gateX = 56;
 
 var gateY = 20;
+
+/* MISC COORDS */
+
+var wellX = 28;
+
+var wellY = 12;
 
 
 /* DIRECTIONS CONSTANT */

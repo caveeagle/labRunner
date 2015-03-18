@@ -86,7 +86,7 @@ Lab.makeBlockLine = function(X,Y,DIR)
         case LEFT:  dX = -1 ;
                     break;
         default:    alert("Error in step direction");
-                    return false;
+                    return;
     }        
     
     var x1, y1, x2, y2;
@@ -249,21 +249,28 @@ Lab.makeLabyrinth = function()
         }
         
         // Add papers block 
-        var RX,RY;
-        while(true)
+        if(LabType == "manual")
         {
-            RX = 32+Math.random()*12; //x [32,44) 
-            RX = RX^0; // округление
-            RY = 12+Math.random()*8; //x [12,20) 
-            RY = RY^0; // округление            
-            
-            if( this.blocks[RX][RY] == emptyBlock ) 
+            var RX,RY;
+            while(true)
             {
-                this.blocks[RX][RY] = paperBlock;
-                break;
+                RX = 32+Math.random()*12; //x [32,44) 
+                RX = RX^0; // округление
+                RY = 12+Math.random()*8; //x [12,20) 
+                RY = RY^0; // округление            
+                
+                if( this.blocks[RX][RY] == emptyBlock ) 
+                {
+                    this.blocks[RX][RY] = paperBlock;
+                    break;
+                }
             }
-        }
-        
+        }        
+        // Add wells 
+        if(LabType == "auto")
+        {
+          this.blocks[wellX][wellY] = wellBlock;
+        }        
         
 }
 

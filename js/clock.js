@@ -8,7 +8,7 @@ Number.prototype.pad = function(size)
       var s = String(this);
       while (s.length < (size || 2)) {s = "0" + s;}
       return s;
-}
+};
     
 var Clock = {};
 
@@ -29,7 +29,7 @@ Clock.Init = function()
     var mStr = this.minutes.pad(2);
     
     $("#clockBoxId").text(this.hours+":"+mStr);
-}
+};
 
 Clock.step = function()
 {
@@ -52,8 +52,5 @@ Clock.step = function()
     var hStr = this.hours.pad(2);
  
     $("#clockBoxId").text(hStr+":"+mStr);
-}
-
-
-
+};
 

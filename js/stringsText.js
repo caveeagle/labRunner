@@ -24,7 +24,7 @@ SENTENCES_RU["outside at night N2"] = "Никто ещё не оставался в живых, проведя н
 
 SENTENCES_RU["daytime exceeded"] = SENTENCES_RU["daytime exceeded base"]+SENTENCES_RU["outside at night N1"]+SENTENCES_RU["daytime exceeded N2"]; 
 
-SENTENCES_RU["outside at night"] = SENTENCES_RU["daytime exceeded base"]+SENTENCES_RU["outside at night N1"]+SENTENCES_RU["outside at night N2"]
+SENTENCES_RU["outside at night"] = SENTENCES_RU["daytime exceeded base"]+SENTENCES_RU["outside at night N1"]+SENTENCES_RU["outside at night N2"];
 
 SENTENCES_RU["you lose"] = "Аааа! Вы погибли ночью, в абсолютной темноте лабиринта"; 
 
@@ -40,11 +40,11 @@ SENTENCES_RU["wins count"] = "Побед:";
 
 SENTENCES_RU["death count"] = "Поражений:"; 
 
-SENTENCES_RU["after win N1"] = "Ты думал, что нашел выход... что теперь сможешь забыть Лабиринт, как страшный сон. "; 
-SENTENCES_RU["after win N2"] = "Но, когда ты очнулся, вокруг снова были бесконечные серые стены. ";
-SENTENCES_RU["after win N3"] = "Надо продолжать сражаться!";
+SENTENCES_RU["aw1"] = "Ты думал, что нашел выход... что теперь сможешь забыть Лабиринт, как страшный сон. "; 
+SENTENCES_RU["aw2"] = "Но, когда ты очнулся, вокруг снова были бесконечные серые стены. ";
+SENTENCES_RU["aw3"] = "Надо продолжать сражаться!";
 
-SENTENCES_RU["after win"] = SENTENCES_RU["after win N1"]+SENTENCES_RU["after win N2"]+SENTENCES_RU["after win N3"]
+SENTENCES_RU["after win"] = SENTENCES_RU["aw1"]+SENTENCES_RU["aw2"]+SENTENCES_RU["aw3"];
 
 SENTENCES_RU["paper find"] = "Вы нашли какую-то смятую бумажку...";
 

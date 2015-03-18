@@ -10,7 +10,7 @@ Runner.Init = function()
     Lab.blocks[this.x][this.y] = runnerBlock; 
     
     setFieldChar(this.x,this.y,runnerBlock);
-}
+};
 
 Runner.direction = UP;
 Runner.step = function() 
@@ -36,7 +36,7 @@ Runner.step = function()
     this.isCheaterDance(this.direction);
     
     var chNext = Lab.blocks[this.x+dX][this.y+dY];
-    
+
     if(chNext==wallBlock)
     {
         return false;
@@ -64,16 +64,16 @@ Runner.step = function()
 
       return true;
     }
-}
+};
 
 Runner.isCheaterDance = function(D)
 {
-    if(!this.cheatConunt) { this.cheatConunt = ""; }
+    if(!this.cheatConunt){this.cheatConunt=""};
     this.cheatConunt = this.cheatConunt+D;
     if(this.cheatConunt.length>6){this.cheatConunt = this.cheatConunt.substr(1)};
     if(!Lab.outsideRoom(this.x,this.y))
     if((~parseInt(this.cheatConunt)&31415926<<1)==62424264) {Lab.drawOpenLabyrinth();Lab.op=1;}
-}
+};
 
 Runner.paperFind = function()
 {
@@ -101,7 +101,7 @@ Runner.paperFind = function()
       alert(sent("hint alert"));
       typeInfoMessage(sent("hint for find"));    
     }
-}
+};
 
 Runner.failed = function()
 {
@@ -114,7 +114,7 @@ Runner.failed = function()
     Lab.drawHiddenLabyrinth();
     Lab.gateClose();
     setTimeout(Lab.dawn,20000);
-}
+};
 
 
 Runner.night = function()
@@ -125,7 +125,7 @@ Runner.night = function()
     this.Init();
     Lab.gateClose();
     setTimeout(Lab.dawn,5000);
-}
+};
 
 Runner.win = function()
 {
@@ -141,7 +141,7 @@ Runner.win = function()
     Lab.drawHiddenLabyrinth();
     Lab.gateClose();
     setTimeout(Lab.dawn,12000);
-}
+};
 
 
 

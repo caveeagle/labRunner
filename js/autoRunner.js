@@ -1,9 +1,10 @@
 
 Rob.AutoInit  = function()
 {
-    this.stepnum = 0;
-    this.myDirs = [];
-}
+    /* Заготовка */ 
+} 
+
+Rob.stepnum = 0;
 
 Rob.autostep = function()
 {
@@ -28,73 +29,204 @@ Rob.autostep = function()
    }
    
     /* Algorythm begin */
-    
-    Lab.blocks[this.x][this.y] = crossBlock; // Мы тут были, отмечаем
-    
-    this.underRunnerBlock = crossBlock; // Рисуем свой след
-    
-    var k=0; // Количество свободных клеток
-    if( Lab.blocks[this.x-1][this.y]==emptyBlock ){k++};
-    if( Lab.blocks[this.x][this.y-1]==emptyBlock ){k++};
-    if( Lab.blocks[this.x+1][this.y]==emptyBlock ){k++};
-    if( Lab.blocks[this.x][this.y+1]==emptyBlock ){k++};
-    
-    if( k>1 )
-    {
-        this.myDirs.push({'d':this.direction,'x':this.x,'y':this.y});
-    }
-    
-    if( k>=1 )
-    {     
-        
-        // Составляем массив приоритетных направлений
-        var DirArray = [LEFT,UP,DOWN,RIGHT];
 
-        // Перебираем направления в порядке приоритетности
-        for(var D in DirArray)
-        {
-            var dX = 0;
-            var dY = 0;
-            switch (DirArray[D]) {
-                case UP:    dY = -1 ;
-                            break;
-                case RIGHT: dX = 1 ;
-                            break;
-                case DOWN:  dY = 1 ;
-                            break;
-                case LEFT:  dX = -1 ;
-                            break;
-                default:    return false;
+    if(this.underRunnerBlock==emptyBlock)
+    {
+        this.underRunnerBlock = stepBlock; // Рисуем свой след
+    }
+
+    // Составляем массив приоритетных направлений
+    var DirArray = [LEFT,UP,DOWN,RIGHT];
+
+    var f=0; // Количество свободных клеток
+    if( Lab.blocks[this.x-1][this.y]==emptyBlock ){f++};
+    if( Lab.blocks[this.x][this.y-1]==emptyBlock ){f++};
+    if( Lab.blocks[this.x+1][this.y]==emptyBlock ){f++};
+    if( Lab.blocks[this.x][this.y+1]==emptyBlock ){f++};
+    
+    console.assert(f>0); // Хоть откуда-то мы пришли
+    
+    if(f==1)
+    { // Мы в тупике, разворачиваемся 
+      this.direction = invertDirection(this.direction);
+      this.step();
+      return true; 
+    }
+
+    if(f==2)
+    { // Мы в корридоре, продолжаем движение
+      var p = this.step();
+      if(!p)
+      { // Поворот корридора
+         var currentDirection = this.direction;
+         
+         for(var D in DirArray)
+         {
+            if(DirArray[D]!=currentDirection)
+            {
+               this.direction = DirArray[D];
+               p = this.step();
+               if(p){break;}
             }
-                    
-            var chNext = Lab.blocks[this.x+dX][this.y+dY];
+         }
+         console.assert(p); // Хоть одно направление должна найтись
+      }
+      return true; 
+    }
+
+    if(f>2)
+    { // Самое сложное: мы на развилке
+      
+          if(this.freeCrossroad()
+          { // Пустая развилка, мы тут впервые
+            Rob.setCrossroadArrow(invertDirection(this.direction),-1);
             
-            if( chNext==wallBlock || chNext==crossBlock ) {continue;}
-            this.direction = DirArray[D];
-            this.step();
-            break;
-        }
+            
+            
+            
+          }
+      
+      
+      
+      
+      
+        
+       
+    } // Конец развилки
+    
+};  
+
+Rob.freeCrossroad = function()
+{
+    var c=0;
+    for(var i=1;i<=4;i++)
+    {
+        if(this.getCrossroadArrow(i)!==0){c++;}
+    }
+    if(c==0)
+    {
         return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+Rob.getCrossroadArrow = function(D)
+{
+    var R = 0; //  -1: входящая; 1:исходящая; 
+    
+    var B;    
+    if(D==UP)
+    {
+      B = Lab.blocks[this.x][this.y-1];
+      if(B==upArBlock){R=1};
+      if(B==downArBlock){R=-1};
+    }
+    if(D==DOWN)
+    {
+      B = Lab.blocks[this.x][this.y+1];  
+      if(B==downArBlock){R=1};
+      if(B==upArBlock){R=-1};
+    }
+    if(D==RIGHT)
+    {
+      B = Lab.blocks[this.x+1][this.y];  
+      if(B==rightArBlock){R=1};
+      if(B==leftArBlock){R=-1};
+    }
+    if(D==LEFT)
+    {
+      B = Lab.blocks[this.x-1][this.y];  
+      if(B==leftArBlock){R=1};
+      if(B==rightArBlock){R=-1};
     }
     
-    if( k==0 )
+    return R;
+}
+
+Rob.setCrossroadArrow = function(D,ARR)
+{   
+    //  ARR:   -1: входящая; 1:исходящая; 
+    if(  D<1 || D>4 || ( ARR!=1 && ARR != -1 )  )
     {
-        // Тут сейчас тупик, поэтому мы идём назад по своим следам
-        var prevStep = this.myDirs[myDirs.length-1];
-        
-        if(prevStep === undefined)
-        {
-            alert("IN THE DEADLOCK");
-            return false;
-        }
-        
-        var D = invertDirection(prevDir);
-        this.direction = D;
-        this.step();
-        return true;
+        console.assert(false);
+        return false;
     }
         
-    alert("Algo error");
-    return false;
-};  
+    var B;    
+    if(D==UP)
+    {
+          B = Lab.blocks[this.x][this.y-1];
+          if(B!=emptyBlock)
+          {
+            console.assert(false);
+            return false;
+          }
+          if(ARR==1)
+          {
+            Lab.blocks[this.x][this.y-1] = upArBlock;
+          }
+          if(ARR==-1)
+          {
+            Lab.blocks[this.x][this.y-1] = downArBlock;
+          }
+    }
+
+    if(D==DOWN)
+    {
+          B = Lab.blocks[this.x][this.y+1];
+          if(B!=emptyBlock)
+          {
+            console.assert(false);
+            return false;
+          }
+          if(ARR==1)
+          {
+            Lab.blocks[this.x][this.y+1] = downArBlock;
+          }
+          if(ARR==-1)
+          {
+            Lab.blocks[this.x][this.y+1] = upArBlock;
+          }
+    }
+
+    if(D==RIGHT)
+    {
+          B = Lab.blocks[this.x+1][this.y];
+          if(B!=emptyBlock)
+          {
+            console.assert(false);
+            return false;
+          }
+          if(ARR==1)
+          {
+            Lab.blocks[this.x+1][this.y] = rigthArBlock;
+          }
+          if(ARR==-1)
+          {
+            Lab.blocks[this.x+1][this.y] = leftArBlock;
+          }
+    }
+
+    if(D==LEFT)
+    {
+          B = Lab.blocks[this.x-1][this.y];
+          if(B!=emptyBlock)
+          {
+            console.assert(false);
+            return false;
+          }
+          if(ARR==1)
+          {
+            Lab.blocks[this.x-1][this.y] = leftArBlock;
+          }
+          if(ARR==-1)
+          {
+            Lab.blocks[this.x-1][this.y] = rigthArBlock;
+          }
+    }
+    
+}
 

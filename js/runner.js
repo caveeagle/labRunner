@@ -44,7 +44,7 @@ Runner.step = function()
     else
     {
       Lab.blocks[this.x][this.y] = this.underRunnerBlock;
-                       
+      
       Lab.visibleFields(this,false);
       
       this.x = this.x+dX;  
@@ -63,6 +63,36 @@ Runner.step = function()
 
 
       return true;
+    }
+};
+
+Runner.stepPoss = function(D)
+{
+    var dX = 0;
+    var dY = 0;
+
+    switch (D) {
+        case UP:    dY = -1 ;
+                    break;
+        case RIGHT: dX = 1 ;
+                    break;
+        case DOWN:  dY = 1 ;
+                    break;
+        case LEFT:  dX = -1 ;
+                    break;
+        default:    console.assert(false,"Error in step direction");
+                    return false;
+    }        
+    
+    var chNext = Lab.blocks[this.x+dX][this.y+dY];
+
+    if(chNext==wallBlock)
+    {
+        return false;
+    }
+    else
+    {
+        return true;
     }
 };
 

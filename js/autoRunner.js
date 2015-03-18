@@ -30,19 +30,14 @@ Rob.autostep = function()
    
     /* Algorythm begin */
 
-    if(this.underRunnerBlock==emptyBlock)
-    {
-        this.underRunnerBlock = stepBlock; // Рисуем свой след
-    }
-
     // Составляем массив приоритетных направлений
     var DirArray = [LEFT,UP,DOWN,RIGHT];
 
     var f=0; // Количество свободных клеток
-    if( Lab.blocks[this.x-1][this.y]==emptyBlock ){f++};
-    if( Lab.blocks[this.x][this.y-1]==emptyBlock ){f++};
-    if( Lab.blocks[this.x+1][this.y]==emptyBlock ){f++};
-    if( Lab.blocks[this.x][this.y+1]==emptyBlock ){f++};
+    if( Lab.blocks[this.x-1][this.y]!=wallBlock ){f++};
+    if( Lab.blocks[this.x][this.y-1]!=wallBlock ){f++};
+    if( Lab.blocks[this.x+1][this.y]!=wallBlock ){f++};
+    if( Lab.blocks[this.x][this.y+1]!=wallBlock ){f++};
     
     console.assert(f>0); // Хоть откуда-то мы пришли
     
@@ -77,16 +72,31 @@ Rob.autostep = function()
     if(f>2)
     { // Самое сложное: мы на развилке
       
-          if(this.freeCrossroad()
+          if(this.freeCrossroad())
           { // Пустая развилка, мы тут впервые
             Rob.setCrossroadArrow(invertDirection(this.direction),-1);
             
-            
-            
-            
-          }
+            // Перебираем направления в порядке приоритетности
+             var currentDirection = this.direction;
+             
+             for(var D in DirArray)
+             {
+                if(DirArray[D]!=currentDirection)
+                {
+                    var p = this.stepPoss(DirArray[D]);
+                    if(p)
+                    {
+                        this.direction = DirArray[D];
+                        Rob.setCrossroadArrow(this.direction,1);
+                        this.step();
+                        break;
+                    }
+                }
+             }
+             
+          }// Конец первого if
       
-      
+          this.step();// Просто загушка, надо потом убрать
       
       
       
